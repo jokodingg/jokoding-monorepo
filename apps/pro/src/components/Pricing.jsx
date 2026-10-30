@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Check, Star } from 'lucide-react';
+import { waLink } from '@jokoding/config';
 
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState('landing-page');
@@ -408,9 +409,7 @@ const Pricing = () => {
               {/* CTA Button */}
               <button
                 onClick={() => {
-                  const phone = "62881080715967";
-                  const text = encodeURIComponent(`Halo Jokoding, saya tertarik dengan paket ${plan.name} - ${currentData.title}`);
-                  window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+                  window.open(waLink(`Halo Jokoding, saya tertarik dengan paket ${plan.name} - ${currentData.title}`), "_blank");
                 }}
                 className={`w-full py-3.5 rounded-xl font-bold transition-all duration-300 ${
                   plan.popular

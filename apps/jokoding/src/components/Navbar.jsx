@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { waLink } from '@jokoding/config';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,9 +24,7 @@ const Navbar = () => {
 
   // Logic tombol WA
   const handleWhatsApp = () => {
-    const phone = "62881080715967";
-    const text = encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`);
-    window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
+    window.open(waLink(`Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`), "_blank");
   };
 
   const navLinks = ['home', 'services', 'portfolio', 'testimonials'];

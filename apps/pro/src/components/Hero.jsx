@@ -1,9 +1,9 @@
 import { ArrowRight, CheckCircle, Code, Smartphone, Cpu } from 'lucide-react';
+import { waLink } from '@jokoding/config';
 
 const Hero = () => {
   
   const handleWhatsApp = () => {
-    const phoneNumber = "62881080715967"; 
     const message = `Halo Jokoding,
 
 Saya tertarik untuk konsultasi pembuatan website:
@@ -13,7 +13,7 @@ Detail Kebutuhan:
 Budget:
 
 Mohon informasi lebih lanjut. Terima kasih.`;
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    const url = waLink(message);
     window.open(url, '_blank');
   };
 

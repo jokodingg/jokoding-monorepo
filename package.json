@@ -1,0 +1,14 @@
+{
+  "name": "jokoding-web",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "dev:jokoding": "turbo dev --filter=@jokoding/jokoding",
+    "dev:pro": "turbo dev --filter=@jokoding/pro"
+  },
+  "devDependencies": {
+    "turbo": "^2.11.10"
+  },
+  "packageManager": "pnpm@10.34.9"
+}

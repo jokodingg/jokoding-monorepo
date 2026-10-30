@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { waLink } from '@jokoding/config';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -64,7 +65,7 @@ const FAQ = () => {
 
               {/* CTA Button - Desktop */}
               <a 
-                href="https://wa.me/62881080715967?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21"
+                href={waLink("Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-600/30"
@@ -112,7 +113,7 @@ const FAQ = () => {
             {/* CTA Button - Mobile */}
             <div className="mt-8 lg:hidden">
               <a 
-                href="https://wa.me/62881080715967?text=Halo%20Jokoding%2C%20saya%20mau%20tanya%20tentang%20jasa%20website"
+                href={waLink("Halo Jokoding, saya mau tanya tentang jasa website")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-600/30 w-full justify-center"
