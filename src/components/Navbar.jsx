@@ -23,7 +23,7 @@ const Navbar = () => {
 
   // Logic tombol WA
   const handleWhatsApp = () => {
-    const phone = "6287784724501";
+    const phone = "62881080715967";
     const text = encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.
 
                     Jenis Project:

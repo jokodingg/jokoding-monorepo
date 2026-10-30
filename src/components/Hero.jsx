@@ -4,7 +4,7 @@ import RotatingText from './reactbits/RotatingText';
 const Hero = () => {
   
   const handleWhatsApp = () => {
-    const phoneNumber = "6287784724501"; 
+    const phoneNumber = "62881080715967"; 
     const message = `Halo kak, saya mau order/konsultasi joki koding.
 
                     Jenis Project:

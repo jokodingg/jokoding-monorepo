@@ -3,7 +3,7 @@ import { Instagram, Linkedin, MessageCircle, Mail, MapPin, ArrowRight } from 'lu
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const waLink = "https://wa.me/6287784724501?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21";
+  const waLink = "https://wa.me/62881080715967?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21";
 
   return (
     <footer id="contact" className="bg-[#f7f7f2] pt-20 pb-10 border-t border-gray-200 relative overflow-hidden">
@@ -57,7 +57,7 @@ const Footer = () => {
             <div className="flex gap-3 pt-2">
               <SocialLink href="https://www.instagram.com/jokodingg/" icon={<Instagram size={18} />} />
               {/* <SocialLink href="https://www.linkedin.com/in/irfanqs/" icon={<Linkedin size={18} />} /> */}
-              <SocialLink href="https://wa.me/6281333543975" icon={<MessageCircle size={18} />} />
+              <SocialLink href="https://wa.me/62881080715967" icon={<MessageCircle size={18} />} />
               <SocialLink href="mailto:jokoding@gmail.com" icon={<Mail size={18} />} />
             </div>
           </div>
