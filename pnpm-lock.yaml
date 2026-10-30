@@ -12,7 +12,7 @@ importers:
         specifier: ^2.11.10
         version: 2.11.10
 
-  apps/jokoding:
+  apps/jokoding.id:
     dependencies:
       '@jokoding/config':
         specifier: workspace:*
@@ -58,7 +58,7 @@ importers:
         specifier: ^5.0.0
         version: 5.4.21(lightningcss@1.32.0)
 
-  apps/pro:
+  apps/pro.jokoding.id:
     dependencies:
       '@jokoding/config':
         specifier: workspace:*

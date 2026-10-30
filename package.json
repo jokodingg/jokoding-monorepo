@@ -4,8 +4,8 @@
   "scripts": {
     "dev": "turbo dev",
     "build": "turbo build",
-    "dev:jokoding": "turbo dev --filter=@jokoding/jokoding",
-    "dev:pro": "turbo dev --filter=@jokoding/pro"
+    "dev:jokoding": "turbo dev --filter=@jokoding/jokoding.id",
+    "dev:pro": "turbo dev --filter=@jokoding/pro.jokoding.id"
   },
   "devDependencies": {
     "turbo": "^2.11.10"
