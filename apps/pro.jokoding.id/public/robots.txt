@@ -1,0 +1,12 @@
+# Robots.txt untuk Jokoding
+# https://pro.jokoding.id
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pro.jokoding.id/sitemap.xml
+
+# Disallow admin atau folder sensitif (jika ada)
+# Disallow: /admin/
+# Disallow: /private/

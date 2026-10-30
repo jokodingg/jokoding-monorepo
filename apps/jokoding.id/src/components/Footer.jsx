@@ -1,9 +1,10 @@
 import React from 'react';
 import { Instagram, Linkedin, MessageCircle, Mail, MapPin, ArrowRight } from 'lucide-react';
+import { waLink, EMAIL, INSTAGRAM_URL } from '@jokoding/config';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const waLink = "https://wa.me/62881080715967?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21";
+  const ctaLink = waLink("Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!");
 
   return (
     <footer id="contact" className="bg-[#f7f7f2] pt-20 pb-10 border-t border-gray-200 relative overflow-hidden">
@@ -26,7 +27,7 @@ const Footer = () => {
           
           <div className="relative z-10">
             <a 
-              href={waLink}
+              href={ctaLink}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-400 hover:text-gray-900 transition-all transform hover:-translate-y-1 shadow-lg flex items-center gap-2 cursor-pointer"
@@ -55,10 +56,10 @@ const Footer = () => {
             </p>
             
             <div className="flex gap-3 pt-2">
-              <SocialLink href="https://www.instagram.com/jokodingg/" icon={<Instagram size={18} />} />
+              <SocialLink href={INSTAGRAM_URL} icon={<Instagram size={18} />} />
               {/* <SocialLink href="https://www.linkedin.com/in/irfanqs/" icon={<Linkedin size={18} />} /> */}
-              <SocialLink href="https://wa.me/62881080715967" icon={<MessageCircle size={18} />} />
-              <SocialLink href="mailto:jokoding@gmail.com" icon={<Mail size={18} />} />
+              <SocialLink href={waLink()} icon={<MessageCircle size={18} />} />
+              <SocialLink href={`mailto:${EMAIL}`} icon={<Mail size={18} />} />
             </div>
           </div>
 

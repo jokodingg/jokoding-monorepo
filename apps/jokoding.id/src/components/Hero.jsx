@@ -1,12 +1,12 @@
 import React from 'react';
 import RotatingText from './reactbits/RotatingText';
+import { waLink } from '@jokoding/config';
 
 const Hero = () => {
   
   const handleWhatsApp = () => {
-    const phoneNumber = "62881080715967"; 
     const message = `Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`;
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    const url = waLink(message);
     window.open(url, '_blank');
   };
 
