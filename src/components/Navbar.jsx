@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   const handleWhatsApp = () => {
-    const phone = "6287784724501";
+    const phone = "62881080715967";
     const text = encodeURIComponent("Halo Jokoding, saya tertarik untuk konsultasi project...");
     window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
   };

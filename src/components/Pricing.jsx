@@ -408,7 +408,7 @@ const Pricing = () => {
               {/* CTA Button */}
               <button
                 onClick={() => {
-                  const phone = "6287784724501";
+                  const phone = "62881080715967";
                   const text = encodeURIComponent(`Halo Jokoding, saya tertarik dengan paket ${plan.name} - ${currentData.title}`);
                   window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
                 }}
