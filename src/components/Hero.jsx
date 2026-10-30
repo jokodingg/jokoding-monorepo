@@ -5,12 +5,7 @@ const Hero = () => {
   
   const handleWhatsApp = () => {
     const phoneNumber = "62881080715967"; 
-    const message = `Halo kak, saya mau order/konsultasi joki koding.
-
-                    Jenis Project:
-                    Penjelasan Project:
-
-                    Mohon informasinya, terima kasih!`;
+    const message = `Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
   };

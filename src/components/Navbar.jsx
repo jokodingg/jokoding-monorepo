@@ -24,12 +24,7 @@ const Navbar = () => {
   // Logic tombol WA
   const handleWhatsApp = () => {
     const phone = "62881080715967";
-    const text = encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.
-
-                    Jenis Project:
-                    Penjelasan Project:
-
-                    Mohon informasinya, terima kasih!`);
+    const text = encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`);
     window.open(`https://wa.me/${phone}?text=${text}`, "_blank");
   };
 
