@@ -1,7 +1,7 @@
 import React from 'react';
 import { Instagram, Linkedin, MessageCircle, Mail, MapPin, ArrowRight } from 'lucide-react';
 
-const DEFAULT_WA_HREF = "https://wa.me/6287784724501?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21";
+const DEFAULT_WA_HREF = "https://wa.me/62881080715967?text=Halo%20kak%2C%20saya%20mau%20order%2Fkonsultasi%20joki%20koding.%0A%0AJenis%20Project%3A%0APenjelasan%20Project%3A%0A%0AMohon%20informasinya%2C%20terima%20kasih%21";
 
 // Default = isi footer halaman utama. Halaman lain (mis. /website-portfolio) kirim props sendiri.
 const DEFAULT_CTA = {
@@ -97,7 +97,7 @@ const Footer = ({ cta = DEFAULT_CTA, columns = DEFAULT_COLUMNS }) => {
             <div className="flex gap-3 pt-2">
               <SocialLink href="https://www.instagram.com/jokodingg/" label="Instagram Jokoding" icon={<Instagram size={18} />} />
               {/* <SocialLink href="https://www.linkedin.com/in/irfanqs/" icon={<Linkedin size={18} />} /> */}
-              <SocialLink href="https://wa.me/6281333543975" label="WhatsApp Jokoding" icon={<MessageCircle size={18} />} />
+              <SocialLink href="https://wa.me/62881080715967" label="WhatsApp Jokoding" icon={<MessageCircle size={18} />} />
               <SocialLink href="mailto:jokoding@gmail.com" label="Email Jokoding" icon={<Mail size={18} />} />
             </div>
           </div>

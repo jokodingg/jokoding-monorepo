@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 // Default = isi navbar halaman utama. Halaman lain (mis. /website-portfolio) kirim props sendiri.
 const DEFAULT_LINKS = ['home', 'services', 'portfolio', 'testimonials'].map((id) => ({ id, label: id }));
 
-const DEFAULT_WA_HREF = `https://wa.me/6287784724501?text=${encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.
+const DEFAULT_WA_HREF = `https://wa.me/62881080715967?text=${encodeURIComponent(`Halo kak, saya mau order/konsultasi joki koding.
 
                     Jenis Project:
                     Penjelasan Project:

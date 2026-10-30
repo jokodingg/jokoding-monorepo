@@ -1,5 +1,5 @@
 // Isi paket disepakati dengan owner, 2026-10-10. Ubah di sini, tabel desktop dan daftar mobile ikut berubah.
-export const WA_PHONE = '6287784724501';
+export const WA_PHONE = '62881080715967';
 
 export const PACKAGES = [
   {
