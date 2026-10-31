@@ -56,10 +56,10 @@ const Footer = () => {
             </p>
             
             <div className="flex gap-3 pt-2">
-              <SocialLink href={INSTAGRAM_URL} icon={<Instagram size={18} />} />
+              <SocialLink href={INSTAGRAM_URL} label="Instagram Jokoding" icon={<Instagram size={18} />} />
               {/* <SocialLink href="https://www.linkedin.com/in/irfanqs/" icon={<Linkedin size={18} />} /> */}
-              <SocialLink href={waLink()} icon={<MessageCircle size={18} />} />
-              <SocialLink href={`mailto:${EMAIL}`} icon={<Mail size={18} />} />
+              <SocialLink href={waLink()} label="WhatsApp Jokoding" icon={<MessageCircle size={18} />} />
+              <SocialLink href={`mailto:${EMAIL}`} label="Email Jokoding" icon={<Mail size={18} />} />
             </div>
           </div>
 
@@ -77,20 +77,17 @@ const Footer = () => {
           <FooterLinks 
             title="Perusahaan" 
             items={[
-              { label: 'Tentang Kami', href: '#' },
               { label: 'Portfolio', href: '#portfolio' },
-              { label: 'Karir', href: '#' }, 
-              { label: 'Blog', href: '#' },
+              { label: 'Testimoni', href: '#testimonials' },
             ]} 
           />
 
           <FooterLinks 
             title="Dukungan" 
             items={[
-              { label: 'FAQ', href: '#' },
-              { label: 'Syarat & Ketentuan', href: '#' },
-              { label: 'Kebijakan Privasi', href: '#' },
-              { label: 'Kontak Support', href: '#' },
+              { label: 'FAQ', href: '#faq' },
+              { label: 'Syarat & Ketentuan', href: '/peraturan' },
+              { label: 'Kontak Support', href: waLink() },
             ]} 
           />
         </div>
@@ -116,6 +113,7 @@ const FooterLinks = ({ title, items }) => (
         <li key={idx}>
           <a 
             href={item.href} 
+            {...(item.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
             // Link Abu -> Hover Hijau
             className="text-gray-600 hover:text-emerald-600 transition-colors duration-300 flex items-center gap-1 group w-fit text-sm"
           >
@@ -130,9 +128,10 @@ const FooterLinks = ({ title, items }) => (
   </div>
 );
 
-const SocialLink = ({ href, icon }) => (
+const SocialLink = ({ href, label, icon }) => (
   <a 
     href={href} 
+    aria-label={label}
     // Tombol Putih border Abu -> Hover Hijau
     className="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:bg-emerald-600 hover:text-white hover:border-emerald-600 transition-all duration-300 transform hover:-translate-y-1 shadow-sm"
   >

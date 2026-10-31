@@ -58,9 +58,9 @@ const Footer = () => {
             </p>
             
             <div className="flex gap-3 pt-2">
-              <SocialLink href={INSTAGRAM_URL} icon={<Instagram size={18} />} />
-              <SocialLink href={waLink()} icon={<MessageCircle size={18} />} />
-              <SocialLink href={`mailto:${EMAIL}`} icon={<Mail size={18} />} />
+              <SocialLink href={INSTAGRAM_URL} label="Instagram Jokoding" icon={<Instagram size={18} />} />
+              <SocialLink href={waLink()} label="WhatsApp Jokoding" icon={<MessageCircle size={18} />} />
+              <SocialLink href={`mailto:${EMAIL}`} label="Email Jokoding" icon={<Mail size={18} />} />
             </div>
           </div>
 
@@ -78,20 +78,17 @@ const Footer = () => {
           <FooterLinks 
             title="Perusahaan" 
             items={[
-              { label: 'Tentang Kami', href: '#' },
+              { label: 'Tentang Kami', href: '#about' },
               { label: 'Portfolio', href: '#portfolio' },
-              { label: 'Karir', href: '#' }, 
-              { label: 'Blog', href: '#' },
+              { label: 'Harga', href: '#pricing' },
             ]} 
           />
 
           <FooterLinks 
             title="Dukungan" 
             items={[
-              { label: 'FAQ', href: '#' },
-              { label: 'Syarat & Ketentuan', href: '#' },
-              { label: 'Kebijakan Privasi', href: '#' },
-              { label: 'Kontak Support', href: '#' },
+              { label: 'FAQ', href: '#faq' },
+              { label: 'Kontak Support', href: waLink() },
             ]} 
           />
         </div>
@@ -114,6 +111,7 @@ const FooterLinks = ({ title, items }) => (
         <li key={idx}>
           <a 
             href={item.href} 
+            {...(item.href.startsWith('http') && { target: '_blank', rel: 'noopener noreferrer' })}
             className="text-gray-600 hover:text-amber-600 transition-colors duration-300 flex items-center gap-1 group w-fit text-sm"
           >
             <span className="w-0 overflow-hidden group-hover:w-4 transition-all duration-300 flex items-center opacity-0 group-hover:opacity-100">
@@ -127,9 +125,10 @@ const FooterLinks = ({ title, items }) => (
   </div>
 );
 
-const SocialLink = ({ href, icon }) => (
+const SocialLink = ({ href, label, icon }) => (
   <a 
     href={href} 
+    aria-label={label}
     className="w-10 h-10 rounded-full bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-600 hover:bg-gradient-to-r hover:from-amber-500 hover:to-amber-600 hover:text-white hover:border-transparent transition-all duration-300 transform hover:-translate-y-1 shadow-sm"
   >
     {icon}

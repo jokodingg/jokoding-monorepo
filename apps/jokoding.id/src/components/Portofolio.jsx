@@ -1,12 +1,12 @@
 import { useRef, useState } from "react";
 
 // Import gambar portfolio
-import project1 from '../assets/portfolio/project1.jpg';
-import project2 from '../assets/portfolio/project2.jpg';
-import project3 from '../assets/portfolio/project3.jpg';
-import project4 from '../assets/portfolio/project4.jpg';
-import project5 from '../assets/portfolio/project5.jpg';
-import project6 from '../assets/portfolio/project6.jpg';
+import project1 from '../assets/portfolio/project1.webp';
+import project2 from '../assets/portfolio/project2.webp';
+import project3 from '../assets/portfolio/project3.webp';
+import project4 from '../assets/portfolio/project4.webp';
+import project5 from '../assets/portfolio/project5.webp';
+import project6 from '../assets/portfolio/project6.webp';
 
 // 1. Spotlight Card (Kembali ke versi Dark Mode karena di dalam wrapper gelap)
 const SpotlightCard = ({ children, className = "" }) => {
@@ -133,6 +133,10 @@ const Portfolio = () => {
                     <img 
                       src={item.image} 
                       alt={item.title} 
+                      width={960}
+                      height={540}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <div className="absolute top-4 right-4 bg-gray-900/90 backdrop-blur-md border border-gray-700 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
