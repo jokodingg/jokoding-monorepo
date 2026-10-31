@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { waLink } from '@jokoding/config';
+import { useOrderForm } from '../order/OrderFormProvider';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState(null);
+  const { open: openOrderForm } = useOrderForm();
 
   const faqs = [
     {
@@ -64,14 +66,12 @@ const FAQ = () => {
               </p>
 
               {/* CTA Button - Desktop */}
-              <a 
-                href={waLink("Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-600/30"
+              <button 
+                onClick={openOrderForm}
+                className="cursor-pointer hidden lg:inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition-all duration-300 shadow-lg shadow-emerald-600/30"
               >
                 Hubungi Kami
-              </a>
+              </button>
             </div>
           </div>
 

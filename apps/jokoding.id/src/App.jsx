@@ -8,10 +8,11 @@ import Portfolio from './components/Portofolio';
 import Testimonials from './components/Testimonials';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import { OrderFormProvider } from './order/OrderFormProvider';
 
 function App() {
   return (
-    <>
+    <OrderFormProvider>
       <Navbar />
       <Hero />
       <TechStack />
@@ -21,7 +22,7 @@ function App() {
       <FAQ />
       <Footer />
       <Analytics />
-    </>
+    </OrderFormProvider>
   )
 }
 

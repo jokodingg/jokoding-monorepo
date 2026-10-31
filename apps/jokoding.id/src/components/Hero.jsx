@@ -1,14 +1,9 @@
 import React from 'react';
 import RotatingText from './reactbits/RotatingText';
-import { waLink } from '@jokoding/config';
+import { useOrderForm } from '../order/OrderFormProvider';
 
 const Hero = () => {
-  
-  const handleWhatsApp = () => {
-    const message = `Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`;
-    const url = waLink(message);
-    window.open(url, '_blank');
-  };
+  const { open: openOrderForm } = useOrderForm();
 
   const handleScroll = (targetId) => {
     const element = document.getElementById(targetId);
@@ -68,7 +63,7 @@ const Hero = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center lg:justify-start">
                 
                 <button 
-                  onClick={handleWhatsApp}
+                  onClick={openOrderForm}
                   className="cursor-pointer px-8 py-4 rounded-full bg-emerald-600 text-white font-bold text-sm tracking-wide uppercase shadow-[0_0_20px_rgba(5,150,105,0.4)] hover:bg-emerald-500 hover:shadow-[0_0_30px_rgba(5,150,105,0.6)] transition-all transform hover:-translate-y-1"
                 >
                   Joki Sekarang!

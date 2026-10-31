@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { waLink } from '@jokoding/config';
+import { useOrderForm } from '../order/OrderFormProvider';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -22,9 +22,11 @@ const Navbar = () => {
     }
   };
 
-  // Logic tombol WA
-  const handleWhatsApp = () => {
-    window.open(waLink(`Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!`), "_blank");
+  // Tombol order membuka Form Order Singkat, lalu lanjut ke WhatsApp
+  const { open: openOrderForm } = useOrderForm();
+  const handleOrder = () => {
+    setMenuOpen(false);
+    openOrderForm();
   };
 
   const navLinks = ['home', 'services', 'portfolio', 'testimonials'];
@@ -70,7 +72,7 @@ const Navbar = () => {
           ))}
           <li>
             <button 
-              onClick={handleWhatsApp}
+              onClick={handleOrder}
               className="bg-emerald-600 text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-[0_0_15px_rgba(16,185,129,0.3)] hover:bg-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.5)] transition-all transform hover:-translate-y-0.5 cursor-pointer"
             >
               Order Now
@@ -82,6 +84,8 @@ const Navbar = () => {
         <button 
           className="md:hidden flex flex-col space-y-1.5 p-2 z-50"
           onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+          aria-expanded={menuOpen}
         >
           {/* Garis Hamburger: Putih kalau scrolled/menu open, Hitam kalau di atas */}
           <span className={`block w-6 h-0.5 transition-transform duration-300 ${
@@ -114,10 +118,10 @@ const Navbar = () => {
             </button>
           ))}
           <button 
-            onClick={handleWhatsApp}
+            onClick={handleOrder}
             className="bg-emerald-600 text-white px-8 py-3 rounded-full font-bold text-lg shadow-lg hover:bg-emerald-500 mt-4"
           >
-            Chat WhatsApp
+            Order Now
           </button>
         </div>
 

@@ -1,10 +1,11 @@
 import React from 'react';
 import { Instagram, Linkedin, MessageCircle, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { waLink, EMAIL, INSTAGRAM_URL } from '@jokoding/config';
+import { useOrderForm } from '../order/OrderFormProvider';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  const ctaLink = waLink("Halo kak, saya mau order/konsultasi joki koding.\n\nJenis Project:\nPenjelasan Project:\n\nMohon informasinya, terima kasih!");
+  const { open: openOrderForm } = useOrderForm();
 
   return (
     <footer id="contact" className="bg-[#f7f7f2] pt-20 pb-10 border-t border-gray-200 relative overflow-hidden">
@@ -26,14 +27,12 @@ const Footer = () => {
           </div>
           
           <div className="relative z-10">
-            <a 
-              href={ctaLink}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button 
+              onClick={openOrderForm}
               className="bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-400 hover:text-gray-900 transition-all transform hover:-translate-y-1 shadow-lg flex items-center gap-2 cursor-pointer"
             >
               Hubungi Kami <ArrowRight className="w-5 h-5" />
-            </a>
+            </button>
           </div>
         </div>
 
