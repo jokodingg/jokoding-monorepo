@@ -93,7 +93,8 @@ const Footer = () => {
 
         {/* === SECTION 3: COPYRIGHT (TERANG) === */}
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>&copy; {currentYear} Jokoding. All rights reserved.</p>
+          {/* Halaman blog di-prerender saat build: tahun di browser bisa beda dari tahun build */}
+          <p suppressHydrationWarning>&copy; {currentYear} Jokoding. All rights reserved.</p>
         </div>
 
       </div>

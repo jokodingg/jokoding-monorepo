@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build && vite build --ssr src/entry-server.jsx --outDir dist-server && node scripts/prerender.js",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "TZ=America/Los_Angeles vitest run",
     "smoke": "node scripts/smoke.js"
   },
   "dependencies": {

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { formatDate } from './formatDate';
 
+// Script `test` memakai TZ=America/Los_Angeles: tanpa timeZone UTC, tanggal di sini mundur satu hari.
 describe('formatDate', () => {
   it('format tanggal Indonesia', () => {
     expect(formatDate('2026-11-02')).toBe('2 November 2026');

@@ -27,6 +27,7 @@ const parseOne = (path, raw) => {
   if (!SLUG_PATTERN.test(slug)) fail('nama file harus huruf kecil, angka, dan -');
 
   const { attributes: meta, body } = frontMatter(raw);
+  if (meta.draft !== undefined && typeof meta.draft !== 'boolean') fail('"draft" harus true atau false');
   const draft = meta.draft === true;
 
   for (const field of ['title', 'description', 'date']) {
@@ -44,13 +45,16 @@ const parseOne = (path, raw) => {
     fail('"video" harus link TikTok (tiktok.com/@akun/video/...) atau Instagram (instagram.com/reel/...)');
   }
 
+  const cover = isEmpty(meta.cover) ? null : String(meta.cover).trim();
+  if (cover && !/^(\/|https:\/\/)/.test(cover)) fail('"cover" harus diawali / (file di public/) atau https://');
+
   return {
     slug,
     title: String(meta.title),
     description: String(meta.description),
     date,
     video,
-    cover: isEmpty(meta.cover) ? null : String(meta.cover),
+    cover,
     draft,
     html: marked.parse(body),
   };

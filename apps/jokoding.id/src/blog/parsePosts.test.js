@@ -87,6 +87,19 @@ describe('parsePosts', () => {
     );
   });
 
+  it('gagal kalau draft bukan true atau false', () => {
+    expect(() => one(valid({ draft: 'yes' }))).toThrow('content/blog/x.md: "draft" harus true atau false');
+  });
+
+  it.each(['blog/x.jpg', 'x.jpg', 'http://cdn.example.com/x.jpg'])('gagal kalau cover tidak diawali / atau https://: %s', (cover) => {
+    expect(() => one(valid({ cover }))).toThrow('content/blog/x.md: "cover" harus diawali / (file di public/) atau https://');
+  });
+
+  it('cover https diterima', () => {
+    const [post] = one(valid({ cover: 'https://cdn.example.com/x.jpg' }));
+    expect(post.cover).toBe('https://cdn.example.com/x.jpg');
+  });
+
   it('gagal kalau date tidak valid', () => {
     expect(() => one(valid({ date: '"kemarin"' }))).toThrow('content/blog/x.md: "date" tidak valid');
   });

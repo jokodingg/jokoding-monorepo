@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useOrderForm } from '../order/OrderFormProvider';
 import { scrollToSection } from '../lib/scrollToSection';
 
@@ -22,10 +22,22 @@ const Navbar = () => {
   // Menu "blog" pindah halaman. Menu section: scroll kalau di home, kalau tidak pindah ke /#section
   const goTo = (item) => {
     setMenuOpen(false);
-    if (item === 'blog') navigate('/blog');
-    else if (pathname === '/') scrollToSection(item);
+    if (pathname === '/') scrollToSection(item);
     else navigate(`/#${item}`);
   };
+
+  // "blog" berupa <a> asli supaya bisa di-crawl dan dibuka di tab baru; menu section tetap tombol scroll.
+  // Fungsi biasa (bukan komponen) supaya elemen tidak di-remount tiap render.
+  const renderNavItem = (item, className, key) =>
+    item === 'blog' ? (
+      <Link key={key} to="/blog" onClick={() => setMenuOpen(false)} className={className}>
+        {item}
+      </Link>
+    ) : (
+      <button key={key} onClick={() => goTo(item)} className={className}>
+        {item}
+      </button>
+    );
 
   // Tombol order membuka Form Order Singkat, lalu lanjut ke WhatsApp
   const { open: openOrderForm } = useOrderForm();
@@ -63,16 +75,14 @@ const Navbar = () => {
         <ul className="hidden md:flex space-x-8 items-center">
           {navLinks.map((item) => (
             <li key={item}>
-              <button 
-                onClick={() => goTo(item)} 
-                className={`capitalize font-medium text-sm tracking-wide transition-colors duration-300 cursor-pointer ${
+              {renderNavItem(
+                item,
+                `capitalize font-medium text-sm tracking-wide transition-colors duration-300 cursor-pointer ${
                   dark 
                     ? 'text-gray-300 hover:text-emerald-400' // Text Putih (Pas Scroll)
                     : 'text-gray-800 hover:text-emerald-600' // Text Hitam (Pas Di Atas)
-                }`}
-              >
-                {item}
-              </button>
+                }`,
+              )}
             </li>
           ))}
           <li>
@@ -114,13 +124,7 @@ const Navbar = () => {
           <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl -z-10"></div>
           
           {navLinks.map((item) => (
-            <button 
-              key={item}
-              onClick={() => goTo(item)} 
-              className="text-2xl font-bold text-gray-200 capitalize hover:text-emerald-400 transition-colors"
-            >
-              {item}
-            </button>
+            renderNavItem(item, 'text-2xl font-bold text-gray-200 capitalize hover:text-emerald-400 transition-colors', item)
           ))}
           <button 
             onClick={handleOrder}

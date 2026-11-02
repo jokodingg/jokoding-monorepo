@@ -1,5 +1,6 @@
 // Menulis HTML statis untuk /blog dan setiap post, plus sitemap.xml.
 // Dijalankan setelah `vite build` (client) dan `vite build --ssr` (dist-server).
+import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -22,6 +23,14 @@ const writePage = async (url, meta) => {
 };
 
 const posts = getPosts();
+
+// Cover lokal yang salah ketik tidak boleh lolos: kartu, facade, dan preview WhatsApp jadi tanpa gambar.
+for (const post of posts) {
+  if (post.cover?.startsWith('/') && !existsSync(join(dist, post.cover))) {
+    throw new Error(`content/blog/${post.slug}.md: cover ${post.cover} tidak ada di public/`);
+  }
+}
+
 await writePage('/blog', blogIndexMeta());
 for (const post of posts) {
   await writePage(`/blog/${post.slug}`, postMeta(post));
