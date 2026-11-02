@@ -62,7 +62,7 @@ Catatan build:
 
 - `dist-server/` masuk `.gitignore`. Output turbo tetap `dist/**`.
 - Home `/` tidak diprerender karena Hero memakai animasi `motion` dan `RotatingText` yang berisiko hydration mismatch. `dist/index.html` tetap sebagai shell SPA. Prerender home bisa menjadi task terpisah.
-- Vercel menyajikan `dist/blog/<slug>/index.html` untuk `/blog/<slug>`. Slug yang tidak ada mendapat 404 bawaan Vercel. `vercel.json` tidak berubah.
+- Vercel menyajikan `dist/blog/<slug>/index.html` untuk `/blog/<slug>`. Slug yang tidak ada mendapat 404 bawaan Vercel. `vercel.json` mendapat `"buildCommand": "pnpm build"`, supaya Vercel menjalankan ketiga langkah dan tidak hanya `vite build` dari preset.
 
 ### Navigasi
 
