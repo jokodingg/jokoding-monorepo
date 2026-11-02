@@ -97,6 +97,8 @@ Isi artikel dalam Markdown.
 | `date` | ya | Format `YYYY-MM-DD`. Dipakai untuk urutan, tampilan, dan `uploadDate` |
 | `video` | tidak | Link TikTok (`tiktok.com/@akun/video/<id>`) atau Instagram (`instagram.com/reel/<kode>`, `/reels/`, `/p/`). Link pendek `vm.tiktok.com` ditolak. Tanpa `video`, `cover` tampil sebagai gambar pembuka |
 | `cover` | ya, kecuali `draft: true` | Path gambar di `public/` (disarankan 1200x630) atau URL `https://`. Wajib karena thumbnail TikTok dan Instagram tidak bisa diambil otomatis secara stabil |
+| `author` | tidak | Nama penulis, tampil di bawah judul ("2 November 2026 · oleh <nama>"). JSON-LD `author` menjadi `Person`; tanpa `author`, JSON-LD memakai organisasi Jokoding |
+| `authorUrl` | tidak (butuh `author`) | Link profil penulis, harus diawali `https://`, dibuka di tab baru |
 | `draft` | tidak | Default `false`. Draft tampil di dev dan disembunyikan di production |
 
 Link video diubah oleh `parseVideoUrl(url)` menjadi `{ platform: 'tiktok' | 'instagram', id, embedUrl }`:
@@ -109,7 +111,7 @@ Link video diubah oleh `parseVideoUrl(url)` menjadi `{ platform: 'tiktok' | 'ins
 - Membaca file dengan `import.meta.glob('/content/blog/*.md', { query: '?raw', import: 'default', eager: true })`.
 - Logika parse dan validasi ada di fungsi murni `parsePosts(files, { includeDrafts })`, supaya bisa ditest tanpa Vite.
 - Frontmatter diparse dengan paket `front-matter`. `gray-matter` tidak dipakai karena bergantung pada `Buffer`.
-- Markdown diubah ke HTML dengan `marked`, satu kali saat modul dimuat. Konten berasal dari repo sendiri, jadi dianggap terpercaya dan dirender dengan `dangerouslySetInnerHTML`.
+- Markdown diubah ke HTML dengan `marked`, satu kali saat modul dimuat. Link `http(s)://` di artikel diberi `target="_blank" rel="noopener noreferrer"`; link internal tidak. Konten berasal dari repo sendiri, jadi dianggap terpercaya dan dirender dengan `dangerouslySetInnerHTML`.
 - `includeDrafts` bernilai `import.meta.env.DEV`.
 - Ekspor modul: `getPosts()` (urut tanggal terbaru) dan `getPost(slug)` (mengembalikan `undefined` kalau tidak ada).
 - Semua post masuk bundle client. Kalau jumlah post mencapai ratusan, loader dipecah per post.

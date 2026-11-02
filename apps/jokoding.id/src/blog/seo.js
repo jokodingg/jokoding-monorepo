@@ -49,7 +49,9 @@ export const postMeta = (post) => {
       url: canonical,
       mainEntityOfPage: canonical,
       image,
-      author: ORGANIZATION,
+      author: post.author
+        ? { '@type': 'Person', name: post.author.name, ...(post.author.url && { url: post.author.url }) }
+        : ORGANIZATION,
       publisher: ORGANIZATION,
       ...(post.video && {
         video: {

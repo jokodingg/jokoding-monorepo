@@ -36,6 +36,7 @@ describe('parsePosts', () => {
           embedUrl: 'https://www.tiktok.com/player/v1/123',
         },
         cover: '/blog/x.jpg',
+        author: null,
         draft: false,
         html: expect.stringContaining('<h2'),
       },
@@ -103,6 +104,34 @@ describe('parsePosts', () => {
   it('cover https diterima', () => {
     const [post] = one(valid({ cover: 'https://cdn.example.com/x.jpg' }));
     expect(post.cover).toBe('https://cdn.example.com/x.jpg');
+  });
+
+  it('author dengan link', () => {
+    const [post] = one(valid({ author: '"Irfan Qobus"', authorUrl: 'https://github.com/irfanqs' }));
+    expect(post.author).toEqual({ name: 'Irfan Qobus', url: 'https://github.com/irfanqs' });
+  });
+
+  it('author tanpa link', () => {
+    const [post] = one(valid({ author: '"Irfan Qobus"' }));
+    expect(post.author).toEqual({ name: 'Irfan Qobus', url: null });
+  });
+
+  it('gagal kalau authorUrl tanpa author', () => {
+    expect(() => one(valid({ authorUrl: 'https://github.com/irfanqs' }))).toThrow(
+      'content/blog/x.md: "authorUrl" butuh "author"',
+    );
+  });
+
+  it('gagal kalau authorUrl bukan https://', () => {
+    expect(() => one(valid({ author: '"Irfan"', authorUrl: 'github.com/irfanqs' }))).toThrow(
+      'content/blog/x.md: "authorUrl" harus diawali https://',
+    );
+  });
+
+  it('link eksternal di artikel dibuka di tab baru, link internal tidak', () => {
+    const [post] = one(valid(), { body: '[DeepSeek](https://www.deepseek.com) dan [blog](/blog)' });
+    expect(post.html).toContain('<a href="https://www.deepseek.com" target="_blank" rel="noopener noreferrer">DeepSeek</a>');
+    expect(post.html).toContain('<a href="/blog">blog</a>');
   });
 
   it('gagal kalau date tidak valid', () => {

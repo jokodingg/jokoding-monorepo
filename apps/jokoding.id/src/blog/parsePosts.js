@@ -1,6 +1,21 @@
 import frontMatter from 'front-matter';
-import { marked } from 'marked';
+import { Marked } from 'marked';
 import { parseVideoUrl } from './parseVideoUrl';
+
+const escapeAttr = (value) =>
+  value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+// Link ke situs lain dibuka di tab baru supaya pembaca tidak meninggalkan blog.
+const markdown = new Marked({
+  renderer: {
+    link({ href, title, tokens }) {
+      const text = this.parser.parseInline(tokens);
+      const titleAttr = title ? ` title="${escapeAttr(title)}"` : '';
+      const external = /^https?:\/\//.test(href) ? ' target="_blank" rel="noopener noreferrer"' : '';
+      return `<a href="${escapeAttr(href)}"${titleAttr}${external}>${text}</a>`;
+    },
+  },
+});
 
 const SLUG_PATTERN = /^[a-z0-9-]+$/;
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
@@ -46,6 +61,14 @@ const parseOne = (path, raw) => {
   const cover = isEmpty(meta.cover) ? null : String(meta.cover).trim();
   if (cover && !/^(\/|https:\/\/)/.test(cover)) fail('"cover" harus diawali / (file di public/) atau https://');
 
+  if (!isEmpty(meta.authorUrl) && isEmpty(meta.author)) fail('"authorUrl" butuh "author"');
+  if (!isEmpty(meta.authorUrl) && !String(meta.authorUrl).startsWith('https://')) {
+    fail('"authorUrl" harus diawali https://');
+  }
+  const author = isEmpty(meta.author)
+    ? null
+    : { name: String(meta.author).trim(), url: isEmpty(meta.authorUrl) ? null : String(meta.authorUrl).trim() };
+
   return {
     slug,
     title: String(meta.title),
@@ -53,8 +76,9 @@ const parseOne = (path, raw) => {
     date,
     video,
     cover,
+    author,
     draft,
-    html: marked.parse(body),
+    html: markdown.parse(body),
   };
 };
 

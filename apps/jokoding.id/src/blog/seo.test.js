@@ -8,6 +8,7 @@ const post = (overrides = {}) => ({
   date: '2026-11-02',
   video: { platform: 'tiktok', id: '123', embedUrl: 'https://www.tiktok.com/player/v1/123' },
   cover: '/blog/hermes-agent.jpg',
+  author: null,
   draft: false,
   html: '<p>Isi</p>',
   ...overrides,
@@ -34,6 +35,15 @@ describe('postMeta', () => {
       uploadDate: '2026-11-02',
       embedUrl: 'https://www.tiktok.com/player/v1/123',
     });
+  });
+
+  it('author jadi Person di JSON-LD', () => {
+    const { jsonLd } = postMeta(post({ author: { name: 'Irfan Qobus', url: 'https://github.com/irfanqs' } }));
+    expect(jsonLd.author).toEqual({ '@type': 'Person', name: 'Irfan Qobus', url: 'https://github.com/irfanqs' });
+  });
+
+  it('tanpa author, JSON-LD author = Jokoding', () => {
+    expect(postMeta(post()).jsonLd.author).toMatchObject({ '@type': 'Organization', name: 'Jokoding' });
   });
 
   it('cover relatif jadi URL absolut', () => {

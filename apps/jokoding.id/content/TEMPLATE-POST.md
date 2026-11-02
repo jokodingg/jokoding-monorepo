@@ -18,6 +18,8 @@
   - video        opsional. Link TikTok (tiktok.com/@akun/video/...) atau Instagram (instagram.com/reel/...).
                  Link pendek vm.tiktok.com tidak bisa, buka dulu lalu salin link lengkapnya.
                  Tanpa video, cover tampil sebagai gambar pembuka.
+  - author       opsional. Nama penulis, tampil di bawah judul.
+  - authorUrl    opsional (butuh author). Link profil penulis, diawali https://
   - draft        true = cuma tampil di pnpm dev, false = terbit. Hanya boleh true atau false.
 
   Kalau ada field yang salah, build gagal dengan pesan yang menyebut nama file dan field-nya.
@@ -26,6 +28,8 @@
 title: "Judul Post"
 description: "Satu kalimat ringkasan isi post."
 date: 2026-11-02
+author: "Irfan Qobus"
+authorUrl: https://github.com/irfanqs
 cover: /blog/judul-post.jpg
 video: https://www.instagram.com/reel/KODE/
 draft: true

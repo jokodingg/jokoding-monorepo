@@ -43,9 +43,26 @@ const BlogPost = () => {
 
         <header className="mt-6 mb-10">
           <h1 className="text-3xl font-bold leading-tight text-gray-900 md:text-4xl">{post.title}</h1>
-          <time dateTime={post.date} className="mt-3 block text-sm text-gray-500">
-            {formatDate(post.date)}
-          </time>
+          <p className="mt-3 text-sm text-gray-500">
+            <time dateTime={post.date}>{formatDate(post.date)}</time>
+            {post.author && (
+              <>
+                {' · oleh '}
+                {post.author.url ? (
+                  <a
+                    href={post.author.url}
+                    target="_blank"
+                    rel="noopener noreferrer author"
+                    className="font-medium text-gray-700 underline decoration-emerald-500/40 underline-offset-4 hover:text-emerald-700"
+                  >
+                    {post.author.name}
+                  </a>
+                ) : (
+                  <span className="font-medium text-gray-700">{post.author.name}</span>
+                )}
+              </>
+            )}
+          </p>
         </header>
 
         {/* Ada video: tampilkan embed. Tanpa video: cover jadi gambar pembuka. */}
@@ -64,7 +81,7 @@ const BlogPost = () => {
         </div>
 
         <article
-          className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-emerald-700 prose-strong:text-gray-900 prose-li:marker:text-emerald-600"
+          className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-emerald-700 prose-strong:text-gray-900 prose-li:marker:text-emerald-600 prose-code:font-medium prose-code:before:content-none prose-code:after:content-none [&_:not(pre)>code]:rounded [&_:not(pre)>code]:bg-emerald-50 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:text-emerald-900"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 
