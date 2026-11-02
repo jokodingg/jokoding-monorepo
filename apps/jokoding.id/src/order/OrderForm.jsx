@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { X, Send } from 'lucide-react';
 import { waLink } from '@jokoding/config';
 import { buildOrderMessage } from './buildOrderMessage';
+import { trackLead } from '../lib/metaPixel';
 
 // Sama dengan judul di section Services.
 const JENIS = ['Web Development', 'Mobile Apps', 'Internet of Things', 'AI & Deep Learning', 'Backend & API', 'Network & Server', 'Lainnya'];
@@ -29,6 +30,7 @@ const OrderForm = ({ isOpen, onClose }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    trackLead('order_form');
     window.open(waLink(buildOrderMessage(data)), '_blank');
     onClose();
   };
@@ -36,6 +38,7 @@ const OrderForm = ({ isOpen, onClose }) => {
   return (
     <dialog
       ref={dialogRef}
+      id="order-form"
       onClose={onClose}
       // Klik di area gelap di luar kartu menutup pop-up.
       onClick={(e) => e.target === dialogRef.current && onClose()}

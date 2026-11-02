@@ -9,6 +9,7 @@ import Home from './pages/Home';
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
 import { OrderFormProvider } from './order/OrderFormProvider';
+import MetaPixelTracker from './lib/MetaPixelTracker';
 
 // Pindah halaman mulai dari atas, kecuali tujuan punya hash (#services dan sejenisnya).
 const ScrollToTop = () => {
@@ -31,6 +32,7 @@ function App() {
       </Routes>
       <Footer />
       <Analytics />
+      <MetaPixelTracker />
     </OrderFormProvider>
   )
 }
