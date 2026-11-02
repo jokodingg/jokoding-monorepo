@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@jokoding/config": "workspace:*",
+    "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.1.18",
     "@vercel/analytics": "^1.6.1",
     "front-matter": "^4.0.2",
