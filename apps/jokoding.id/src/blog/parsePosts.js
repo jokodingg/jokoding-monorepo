@@ -33,9 +33,7 @@ const parseOne = (path, raw) => {
   for (const field of ['title', 'description', 'date']) {
     if (isEmpty(meta[field])) fail(`"${field}" wajib diisi`);
   }
-  for (const field of ['video', 'cover']) {
-    if (!draft && isEmpty(meta[field])) fail(`"${field}" wajib diisi`);
-  }
+  if (!draft && isEmpty(meta.cover)) fail('"cover" wajib diisi');
 
   const date = normalizeDate(meta.date);
   if (!date) fail('"date" tidak valid');

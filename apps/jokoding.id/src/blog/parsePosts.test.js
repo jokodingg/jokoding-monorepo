@@ -77,8 +77,13 @@ describe('parsePosts', () => {
     expect(() => one(valid({ [field]: undefined }))).toThrow(`content/blog/x.md: "${field}" wajib diisi`);
   });
 
-  it.each(['video', 'cover'])('gagal kalau %s kosong pada post non-draft', (field) => {
-    expect(() => one(valid({ [field]: undefined }))).toThrow(`content/blog/x.md: "${field}" wajib diisi`);
+  it('gagal kalau cover kosong pada post non-draft', () => {
+    expect(() => one(valid({ cover: undefined }))).toThrow('content/blog/x.md: "cover" wajib diisi');
+  });
+
+  it('post terbit tanpa video lolos, video null', () => {
+    const [post] = one(valid({ video: undefined }));
+    expect(post).toMatchObject({ draft: false, video: null, cover: '/blog/x.jpg' });
   });
 
   it('gagal kalau link video tidak didukung, juga pada draft', () => {

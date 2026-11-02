@@ -75,13 +75,8 @@ const InstagramEmbed = ({ video, title }) => {
 };
 
 const VideoEmbed = ({ video, title, cover }) => {
-  if (!video) {
-    return (
-      <div className={`${FRAME} aspect-[9/16] flex items-center justify-center text-sm text-gray-400`}>
-        Video belum tersedia
-      </div>
-    );
-  }
+  // Post tanpa video: artikel saja.
+  if (!video) return null;
 
   return video.platform === 'instagram' ? (
     <InstagramEmbed video={video} title={title} />

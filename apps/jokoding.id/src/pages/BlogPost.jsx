@@ -48,10 +48,23 @@ const BlogPost = () => {
           </time>
         </header>
 
-        <VideoEmbed video={post.video} title={post.title} cover={post.cover} />
+        {/* Ada video: tampilkan embed. Tanpa video: cover jadi gambar pembuka. */}
+        <div className="mb-12">
+          {post.video ? (
+            <VideoEmbed video={post.video} title={post.title} cover={post.cover} />
+          ) : (
+            post.cover && (
+              <img
+                src={post.cover}
+                alt=""
+                className="aspect-[1200/630] w-full rounded-2xl object-cover shadow-xl"
+              />
+            )
+          )}
+        </div>
 
         <article
-          className="prose prose-lg mt-12 max-w-none prose-headings:text-gray-900 prose-a:text-emerald-700 prose-strong:text-gray-900 prose-li:marker:text-emerald-600"
+          className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-a:text-emerald-700 prose-strong:text-gray-900 prose-li:marker:text-emerald-600"
           dangerouslySetInnerHTML={{ __html: post.html }}
         />
 

@@ -95,7 +95,7 @@ Isi artikel dalam Markdown.
 | `title` | ya | Judul post, `<title>`, dan `og:title` |
 | `description` | ya | Meta description dan teks kartu |
 | `date` | ya | Format `YYYY-MM-DD`. Dipakai untuk urutan, tampilan, dan `uploadDate` |
-| `video` | ya, kecuali `draft: true` | Link TikTok (`tiktok.com/@akun/video/<id>`) atau Instagram (`instagram.com/reel/<kode>`, `/reels/`, `/p/`). Link pendek `vm.tiktok.com` ditolak |
+| `video` | tidak | Link TikTok (`tiktok.com/@akun/video/<id>`) atau Instagram (`instagram.com/reel/<kode>`, `/reels/`, `/p/`). Link pendek `vm.tiktok.com` ditolak. Tanpa `video`, `cover` tampil sebagai gambar pembuka |
 | `cover` | ya, kecuali `draft: true` | Path gambar di `public/` (disarankan 1200x630) atau URL `https://`. Wajib karena thumbnail TikTok dan Instagram tidak bisa diambil otomatis secara stabil |
 | `draft` | tidak | Default `false`. Draft tampil di dev dan disembunyikan di production |
 
@@ -139,7 +139,7 @@ Urutan isi:
 3. Video, ditampilkan dengan komponen `VideoEmbed`, lebar maksimal sekitar 360px (Instagram 400px), di tengah:
    - TikTok: facade berupa `cover` ditambah tombol play. Iframe `<embedUrl>?autoplay=1&rel=0` baru dimuat saat diklik. Rasio 9:16.
    - Instagram: iframe `embedUrl` dimuat langsung dengan `loading="lazy"`, karena embed Instagram tidak mendukung autoplay dan facade akan butuh dua klik. Tinggi awal 640px, lalu mengikuti pesan `MEASURE` dari halaman embed Instagram. Bingkai bawaan Instagram (header akun, footer) ikut tampil.
-   - Tanpa `video` (draft): kotak "Video belum tersedia".
+   - Tanpa `video`: tidak ada embed; `cover` tampil sebagai gambar pembuka 1200x630.
 4. Artikel di dalam kelas `prose` dari `@tailwindcss/typography`, dengan aksen emerald.
 5. Kotak CTA: "Punya project IT yang mirip?" dan tombol yang memanggil `useOrderForm().open()`.
 
@@ -176,7 +176,8 @@ Fungsi murni yang dipakai bersama oleh prerender dan client:
 
 - Artikel ditulis dari `pieces/hermes-green/renders/narration.srt`, dirapikan menjadi paragraf dan subjudul.
 - Cover `public/blog/hermes-agent.jpg` (1200x630) dibuat dari frame detik 21,6 di `final3.mp4` ("Hermes Agent"), dengan latar frame yang sama di-blur.
-- `draft: true`, tanpa `video`. User memposting video ke TikTok atau Instagram, lalu mengisi `video` dengan link-nya dan mengubah `draft` menjadi `false`.
+- Terbit (`draft: false`) tanpa `video`. Setelah video diposting di TikTok atau Instagram, link-nya diisi ke `video`.
+- Template untuk post baru: `apps/jokoding.id/content/TEMPLATE-POST.md` (di luar `content/blog/`, jadi tidak ikut diparse).
 
 ## Dependency baru (`apps/jokoding.id`)
 

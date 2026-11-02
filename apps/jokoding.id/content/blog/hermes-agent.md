@@ -3,7 +3,7 @@ title: "Hermes Agent: Asisten AI yang Kerja Lewat Telegram"
 description: "Kenalan sama Hermes Agent, AI agent yang bisa kamu kasih tugas lewat chat Telegram dan langsung dikerjain, bahkan pas kamu lagi tidur."
 date: 2026-11-02
 cover: /blog/hermes-agent.jpg
-draft: true
+draft: false
 ---
 
 Pernah gak sih pas kalian lagi di luar rumah, tiba-tiba kepikiran ada kerjaan kecil yang harus diselesain? Mau buka laptop males, dikerjain di HP malah bikin repot, tapi kalau ditunda malah kelupaan.
