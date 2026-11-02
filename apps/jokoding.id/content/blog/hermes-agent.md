@@ -1,6 +1,6 @@
 ---
-title: "Hermes Agent: Asisten AI yang Kerja Lewat Telegram (dan Cara Setup-nya)"
-description: "Kenalan sama Hermes Agent, AI agent yang bisa kamu kasih tugas lewat chat Telegram, plus cara setup-nya dan pilihan model AI murah buat menjalankannya."
+title: "Hermes Agent: Asisten Pribadimu yang Bisa Kerja 24/7"
+description: "Kenalan sama Hermes Agent, AI agent yang bisa kamu kasih tugas selama 24/7 plus cara setup-nya dan pilihan model AI murah buat menjalankannya."
 date: 2026-11-02
 author: "Irfan Qobus"
 authorUrl: https://github.com/irfanqs
@@ -22,38 +22,26 @@ Yang menarik, semuanya bisa kita kontrol cuma lewat chat Telegram, tanpa harus b
 
 Misalnya nih, aku lagi di luar rumah dan tiba-tiba harus revisi data di Excel atau ngedit dokumen di Google Docs. Daripada harus buka laptop, aku tinggal kasih instruksi lewat Telegram, dan Hermes bisa bantu ngerjainnya.
 
-Buat kalian yang programmer, Hermes juga bisa bantu:
-
-- ngerjain task coding,
-- ngecek error,
-- bahkan ngelola project,
-
-selama akses dan tools-nya udah disiapin.
-
-## Bisa jalan otomatis
-
-Hermes gak cuma ngerjain tugas yang kita perintahin. Dia juga bisa jalan secara otomatis.
-
-Misalnya, setiap pagi aku pengen dapet rangkuman berita teknologi terbaru. Daripada nyari satu-satu, tinggal suruh Hermes ngirim rangkumannya otomatis setiap jam 7 pagi.
+Buat kalian yang programmer, Hermes juga bisa bantu ngerjain task coding, ngecek error, bahkan ngelola project, selama akses dan tools-nya udah disiapin.
 
 ## Gak cuma lewat Telegram
 
 Hermes juga bisa dihubungkan ke aplikasi chat lain seperti WhatsApp, Discord, Slack, Signal, dan [banyak platform lainnya](https://hermes-agent.nousresearch.com/docs/user-guide/messaging). Jadi kalian bisa ngobrol sama asisten AI ini lewat aplikasi chat yang biasa kalian pakai sehari-hari.
 
-## Penting: Hermes butuh model AI (LLM)
+## Meskipun gratis, Hermes tetap butuh model AI (LLM)
 
-Ini yang sering kelewat. Hermes itu "badan"-nya: dia yang ngatur tugas, jalanin perintah, dan nyambung ke Telegram. "Otak"-nya adalah **model AI atau LLM** (*large language model*) yang kalian sambungkan lewat API. Tanpa model AI, Hermes gak bisa ngapa-ngapain. Dokumentasinya juga bilang begitu: [minimal satu provider model harus disetel](https://hermes-agent.nousresearch.com/docs/integrations/providers).
+Ini yang sering kelewat. Hermes itu "badan" nya AI Agent, dia yang ngatur tugas, jalanin perintah, dan nyambung ke Telegram. "Otak"-nya adalah **model AI atau LLM** (*large language model*) yang kalian sambungkan lewat API. Tanpa model AI, Hermes gak bisa ngapa-ngapain. Dokumentasinya juga bilang begitu, [minimal satu provider model harus disetel](https://hermes-agent.nousresearch.com/docs/integrations/providers).
 
-Dan jujur aja: **model AI buat Hermes praktisnya gak bisa gratisan.**
+Dan jujur aja, **model AI buat Hermes praktisnya gak bisa gratisan.**
 
 - Kredit gratis dari provider biasanya kecil banget dan cepat habis, karena agent bisa ngirim banyak permintaan ke model untuk satu tugas.
 - Model yang jalan di komputer sendiri memang gratis, tapi butuh hardware kuat. Hermes juga butuh model dengan *context* minimal **64.000 token**, dan model kecil yang muat di laptop biasa sering gak sanggup.
 
 Kabar baiknya, kalian gak perlu langganan bulanan yang mahal. Hampir semua provider pakai sistem **PAYG** (*pay as you go*): isi saldo, lalu bayar sesuai pemakaian, dihitung per token yang diproses. Kalau Hermes lagi gak dipakai, saldo gak berkurang.
 
-## Pilihan model murah: model AI dari China
+## Ambil model AI murah dari China
 
-Kalau mau hemat, model-model dari China biasanya jauh lebih murah dibanding model populer dari Amerika, dan kemampuannya sudah bagus buat kerjaan agent. Semuanya sudah didukung Hermes:
+Kalau mau hemat, model-model dari China biasanya jauh lebih murah dibanding model populer dari Amerika, dan kemampuannya saat ini sudah bagus buat kerjaan agent. Semuanya sudah didukung Hermes:
 
 - **[DeepSeek](https://www.deepseek.com)**: salah satu yang paling murah dan populer. [Cek harganya di sini](https://api-docs.deepseek.com/quick_start/pricing).
 - **[GLM dari Z.ai](https://z.ai/model-api)**: model GLM buatan Zhipu, kuat buat coding dan tugas agent.
@@ -61,7 +49,7 @@ Kalau mau hemat, model-model dari China biasanya jauh lebih murah dibanding mode
 - **[Qwen dari Alibaba Cloud](https://www.alibabacloud.com/en/product/modelstudio)**: banyak pilihan ukuran model, dari yang ringan sampai yang besar.
 - **[MiniMax](https://www.minimax.io)**: alternatif lain yang harganya bersaing.
 
-Mau coba-coba beberapa model tanpa daftar ke banyak tempat? Pakai **[OpenRouter](https://openrouter.ai)**: cukup satu akun dan satu API key untuk akses banyak model, termasuk model-model di atas.
+Mau coba-coba beberapa model tanpa daftar ke banyak tempat? Pakai **[OpenRouter](https://openrouter.ai)**. cukup satu akun dan satu API key untuk akses banyak model, termasuk model-model di atas. Kalau kamu mau testing pake model gratisan dulu, OpenRouter juga menyediakan model free yang bisa kamu pakai, meskipun limitnya sangat terbatas dan responnya mungkin sangat lemot (karena banyaknya request dari berbagai user).
 
 Beberapa catatan:
 
