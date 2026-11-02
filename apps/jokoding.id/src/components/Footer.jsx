@@ -66,25 +66,25 @@ const Footer = () => {
           <FooterLinks 
             title="Layanan" 
             items={[
-              { label: 'Web Development', href: '#services' },
-              { label: 'IoT & Embedded', href: '#services' },
-              { label: 'AI & Machine Learning', href: '#services' },
-              { label: 'Mobile Apps', href: '#services' },
+              { label: 'Web Development', href: '/#services' },
+              { label: 'IoT & Embedded', href: '/#services' },
+              { label: 'AI & Machine Learning', href: '/#services' },
+              { label: 'Mobile Apps', href: '/#services' },
             ]} 
           />
 
           <FooterLinks 
             title="Perusahaan" 
             items={[
-              { label: 'Portfolio', href: '#portfolio' },
-              { label: 'Testimoni', href: '#testimonials' },
+              { label: 'Portfolio', href: '/#portfolio' },
+              { label: 'Testimoni', href: '/#testimonials' },
             ]} 
           />
 
           <FooterLinks 
             title="Dukungan" 
             items={[
-              { label: 'FAQ', href: '#faq' },
+              { label: 'FAQ', href: '/#faq' },
               { label: 'Syarat & Ketentuan', href: '/peraturan' },
               { label: 'Kontak Support', href: waLink() },
             ]} 

@@ -1,25 +1,34 @@
 // src/App.jsx
+// Router dipasang di entry-client (BrowserRouter) dan entry-server (StaticRouter).
+import { useEffect } from 'react';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import { Analytics } from "@vercel/analytics/react";
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import TechStack from './components/TechStack';
-import Services from './components/Services';
-import Portfolio from './components/Portofolio';
-import Testimonials from './components/Testimonials';
-import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import Home from './pages/Home';
+import BlogIndex from './pages/BlogIndex';
+import BlogPost from './pages/BlogPost';
 import { OrderFormProvider } from './order/OrderFormProvider';
+
+// Pindah halaman mulai dari atas, kecuali tujuan punya hash (#services dan sejenisnya).
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 function App() {
   return (
     <OrderFormProvider>
+      <ScrollToTop />
       <Navbar />
-      <Hero />
-      <TechStack />
-      <Services />
-      <Portfolio />
-      <Testimonials />
-      <FAQ />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
       <Footer />
       <Analytics />
     </OrderFormProvider>

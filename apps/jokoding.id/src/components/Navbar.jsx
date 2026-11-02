@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useOrderForm } from '../order/OrderFormProvider';
+import { scrollToSection } from '../lib/scrollToSection';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   // Scroll detection untuk ganti background navbar
   useEffect(() => {
@@ -12,14 +16,15 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll dengan offset biar ga ketutup navbar
-  const scrollTo = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      const y = element.getBoundingClientRect().top + window.scrollY - 80;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      setMenuOpen(false);
-    }
+  // Di luar home selalu gelap: navbar transparan tidak terbaca di atas halaman blog
+  const dark = scrolled || pathname !== '/';
+
+  // Menu "blog" pindah halaman. Menu section: scroll kalau di home, kalau tidak pindah ke /#section
+  const goTo = (item) => {
+    setMenuOpen(false);
+    if (item === 'blog') navigate('/blog');
+    else if (pathname === '/') scrollToSection(item);
+    else navigate(`/#${item}`);
   };
 
   // Tombol order membuka Form Order Singkat, lalu lanjut ke WhatsApp
@@ -29,12 +34,12 @@ const Navbar = () => {
     openOrderForm();
   };
 
-  const navLinks = ['home', 'services', 'portfolio', 'testimonials'];
+  const navLinks = ['home', 'services', 'portfolio', 'testimonials', 'blog'];
 
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 border-b ${
-        scrolled 
+        dark 
           ? 'bg-gray-900/90 backdrop-blur-md border-gray-800 shadow-lg py-3' // PAS SCROLL: Mode Gelap
           : 'bg-transparent border-transparent py-6' // PAS DI ATAS: Transparan
       }`}
@@ -42,14 +47,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 flex justify-between items-center">
         
         {/* LOGO */}
-        <div className="shrink-0 cursor-pointer" onClick={() => scrollTo('home')}>
+        <div className="shrink-0 cursor-pointer" onClick={() => goTo('home')}>
           <img 
             src="/logo-jokoding-only.png" 
             alt="Logo" 
             className={`h-10 w-auto transition-all duration-300 ${
               // Kalau di atas (scrolled=false) & bukan di menu mobile -> Logo Hitam (jika logo aslimu hitam)
               // Kalau logo aslimu putih/transparan, biarkan default atau pake filter invert
-              !scrolled && !menuOpen ? '' : 'brightness-0 invert' 
+              !dark && !menuOpen ? '' : 'brightness-0 invert' 
             }`} 
           />
         </div>
@@ -59,9 +64,9 @@ const Navbar = () => {
           {navLinks.map((item) => (
             <li key={item}>
               <button 
-                onClick={() => scrollTo(item)} 
+                onClick={() => goTo(item)} 
                 className={`capitalize font-medium text-sm tracking-wide transition-colors duration-300 cursor-pointer ${
-                  scrolled 
+                  dark 
                     ? 'text-gray-300 hover:text-emerald-400' // Text Putih (Pas Scroll)
                     : 'text-gray-800 hover:text-emerald-600' // Text Hitam (Pas Di Atas)
                 }`}
@@ -89,15 +94,15 @@ const Navbar = () => {
         >
           {/* Garis Hamburger: Putih kalau scrolled/menu open, Hitam kalau di atas */}
           <span className={`block w-6 h-0.5 transition-transform duration-300 ${
-            scrolled || menuOpen ? 'bg-white' : 'bg-gray-900'
+            dark || menuOpen ? 'bg-white' : 'bg-gray-900'
           } ${menuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
           
           <span className={`block w-6 h-0.5 transition-opacity duration-300 ${
-            scrolled || menuOpen ? 'bg-white' : 'bg-gray-900'
+            dark || menuOpen ? 'bg-white' : 'bg-gray-900'
           } ${menuOpen ? 'opacity-0' : ''}`}></span>
           
           <span className={`block w-6 h-0.5 transition-transform duration-300 ${
-            scrolled || menuOpen ? 'bg-white' : 'bg-gray-900'
+            dark || menuOpen ? 'bg-white' : 'bg-gray-900'
           } ${menuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
         </button>
 
@@ -111,7 +116,7 @@ const Navbar = () => {
           {navLinks.map((item) => (
             <button 
               key={item}
-              onClick={() => scrollTo(item)} 
+              onClick={() => goTo(item)} 
               className="text-2xl font-bold text-gray-200 capitalize hover:text-emerald-400 transition-colors"
             >
               {item}
