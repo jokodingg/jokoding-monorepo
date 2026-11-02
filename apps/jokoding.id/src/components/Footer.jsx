@@ -66,25 +66,25 @@ const Footer = () => {
           <FooterLinks 
             title="Layanan" 
             items={[
-              { label: 'Web Development', href: '#services' },
-              { label: 'IoT & Embedded', href: '#services' },
-              { label: 'AI & Machine Learning', href: '#services' },
-              { label: 'Mobile Apps', href: '#services' },
+              { label: 'Web Development', href: '/#services' },
+              { label: 'IoT & Embedded', href: '/#services' },
+              { label: 'AI & Machine Learning', href: '/#services' },
+              { label: 'Mobile Apps', href: '/#services' },
             ]} 
           />
 
           <FooterLinks 
             title="Perusahaan" 
             items={[
-              { label: 'Portfolio', href: '#portfolio' },
-              { label: 'Testimoni', href: '#testimonials' },
+              { label: 'Portfolio', href: '/#portfolio' },
+              { label: 'Testimoni', href: '/#testimonials' },
             ]} 
           />
 
           <FooterLinks 
             title="Dukungan" 
             items={[
-              { label: 'FAQ', href: '#faq' },
+              { label: 'FAQ', href: '/#faq' },
               { label: 'Syarat & Ketentuan', href: '/peraturan' },
               { label: 'Kontak Support', href: waLink() },
             ]} 
@@ -93,7 +93,8 @@ const Footer = () => {
 
         {/* === SECTION 3: COPYRIGHT (TERANG) === */}
         <div className="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-500">
-          <p>&copy; {currentYear} Jokoding. All rights reserved.</p>
+          {/* Halaman blog di-prerender saat build: tahun di browser bisa beda dari tahun build */}
+          <p suppressHydrationWarning>&copy; {currentYear} Jokoding. All rights reserved.</p>
         </div>
 
       </div>

@@ -1,4 +1,5 @@
 {
+  "buildCommand": "pnpm build",
   "ignoreCommand": "npx turbo-ignore",
   "redirects": [
     {
