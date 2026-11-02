@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import YouTubeEmbed from '../blog/YouTubeEmbed';
+import VideoEmbed from '../blog/VideoEmbed';
 import { formatDate } from '../blog/formatDate';
 import { getPost } from '../blog/posts';
 import { postTitle } from '../blog/seo';
@@ -48,7 +48,7 @@ const BlogPost = () => {
           </time>
         </header>
 
-        <YouTubeEmbed id={post.youtubeId} title={post.title} orientation={post.orientation} cover={post.cover} />
+        <VideoEmbed video={post.video} title={post.title} cover={post.cover} />
 
         <article
           className="prose prose-lg mt-12 max-w-none prose-headings:text-gray-900 prose-a:text-emerald-700 prose-strong:text-gray-900 prose-li:marker:text-emerald-600"

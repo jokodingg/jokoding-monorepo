@@ -1,7 +1,7 @@
 # Blog `/blog` di jokoding.id — Design
 
 Tanggal: 2026-11-02
-Status: disetujui di brainstorming, menunggu review spec
+Status: disetujui; revisi 2026-11-02: video pindah dari YouTube ke TikTok dan Instagram Reels
 
 ## Tujuan
 
@@ -14,7 +14,7 @@ Blog punya dua tujuan dengan bobot sama:
 
 ### Keputusan dari user
 
-- Video di-upload ke YouTube, lalu blog meng-embed video itu. Tidak ada file video di repo.
+- Video diposting di TikTok atau Instagram Reels, lalu blog meng-embed video itu. Tidak ada file video di repo. (Revisi: awalnya YouTube.)
 - Post ditulis sebagai file Markdown di repo. Commit dan push sama dengan publish.
 - Pendekatan teknis: prerender di dalam app Vite yang sama (bukan app Astro terpisah, bukan SPA murni).
 
@@ -82,8 +82,7 @@ Setiap post adalah satu file `apps/jokoding.id/content/blog/<slug>.md`. Slug dia
 title: "Hermes Agent: Asisten AI yang Kerja Lewat Telegram"
 description: "Satu kalimat ringkasan, dipakai untuk meta description dan kartu."
 date: 2026-11-02
-youtubeId: "abc123XYZ"
-orientation: vertical
+video: https://www.tiktok.com/@jokodingg/video/7432109876543210987
 cover: /blog/hermes-agent.jpg
 draft: false
 ---
@@ -96,10 +95,14 @@ Isi artikel dalam Markdown.
 | `title` | ya | Judul post, `<title>`, dan `og:title` |
 | `description` | ya | Meta description dan teks kartu |
 | `date` | ya | Format `YYYY-MM-DD`. Dipakai untuk urutan, tampilan, dan `uploadDate` |
-| `youtubeId` | ya, kecuali `draft: true` | ID video YouTube |
-| `orientation` | tidak | `vertical` (9:16) atau `horizontal` (16:9). Default `horizontal` |
-| `cover` | tidak | Path gambar di `public/`. Default `https://i.ytimg.com/vi/<youtubeId>/hqdefault.jpg` |
+| `video` | ya, kecuali `draft: true` | Link TikTok (`tiktok.com/@akun/video/<id>`) atau Instagram (`instagram.com/reel/<kode>`, `/reels/`, `/p/`). Link pendek `vm.tiktok.com` ditolak |
+| `cover` | ya, kecuali `draft: true` | Path gambar di `public/` (disarankan 1200x630) atau URL `https://`. Wajib karena thumbnail TikTok dan Instagram tidak bisa diambil otomatis secara stabil |
 | `draft` | tidak | Default `false`. Draft tampil di dev dan disembunyikan di production |
+
+Link video diubah oleh `parseVideoUrl(url)` menjadi `{ platform: 'tiktok' | 'instagram', id, embedUrl }`:
+
+- TikTok: `embedUrl` = `https://www.tiktok.com/player/v1/<id>`
+- Instagram: `embedUrl` = `https://www.instagram.com/reel/<kode>/embed/`
 
 ### Loader `src/blog/posts.js`
 
@@ -115,7 +118,7 @@ Isi artikel dalam Markdown.
 
 - Field wajib kosong. Contoh pesan: `content/blog/x.md: "title" wajib diisi`.
 - `date` tidak valid.
-- `orientation` di luar `vertical` dan `horizontal`.
+- `video` bukan link TikTok atau Instagram yang dikenali (juga pada draft).
 - Nama file bukan slug valid (hanya huruf kecil, angka, dan `-`).
 
 ## UI
@@ -133,10 +136,10 @@ Urutan isi:
 
 1. Link "← Semua tulisan"
 2. Judul dan tanggal
-3. Video, ditampilkan dengan komponen `YouTubeEmbed`:
-   - Facade: thumbnail ditambah tombol play. Iframe `https://www.youtube-nocookie.com/embed/<id>?autoplay=1` baru dimuat saat diklik.
-   - `vertical`: rasio 9:16, lebar maksimal sekitar 360px, posisi di tengah.
-   - `horizontal`: rasio 16:9, lebar penuh kolom konten.
+3. Video, ditampilkan dengan komponen `VideoEmbed`, lebar maksimal sekitar 360px (Instagram 400px), di tengah:
+   - TikTok: facade berupa `cover` ditambah tombol play. Iframe `<embedUrl>?autoplay=1&rel=0` baru dimuat saat diklik. Rasio 9:16.
+   - Instagram: iframe `embedUrl` dimuat langsung dengan `loading="lazy"`, karena embed Instagram tidak mendukung autoplay dan facade akan butuh dua klik. Tinggi awal 640px, lalu mengikuti pesan `MEASURE` dari halaman embed Instagram. Bingkai bawaan Instagram (header akun, footer) ikut tampil.
+   - Tanpa `video` (draft): kotak "Video belum tersedia".
 4. Artikel di dalam kelas `prose` dari `@tailwindcss/typography`, dengan aksen emerald.
 5. Kotak CTA: "Punya project IT yang mirip?" dan tombol yang memanggil `useOrderForm().open()`.
 
@@ -150,7 +153,7 @@ Fungsi murni yang dipakai bersama oleh prerender dan client:
 
 - `blogIndexMeta()` dan `postMeta(post)` mengembalikan `{ title, description, canonical, image, type, jsonLd }`.
 - `renderHead(meta)` mengembalikan string HTML untuk `<title>`, `meta description`, `link canonical`, `og:*`, `twitter:*`, dan `<script type="application/ld+json">`. Semua nilai di-escape.
-- JSON-LD post: `BlogPosting` dengan properti `video` berupa `VideoObject` (`name`, `description`, `thumbnailUrl`, `uploadDate`, `embedUrl`).
+- JSON-LD post: `BlogPosting` dengan properti `video` berupa `VideoObject` (`name`, `description`, `thumbnailUrl` = cover, `uploadDate`, `embedUrl` = `video.embedUrl`).
 - Format title: `<judul post> | Blog Jokoding`.
 
 ### Prerender
@@ -172,8 +175,8 @@ Fungsi murni yang dipakai bersama oleh prerender dan client:
 ## Post pertama: `hermes-agent.md`
 
 - Artikel ditulis dari `pieces/hermes-green/renders/narration.srt`, dirapikan menjadi paragraf dan subjudul.
-- `orientation: vertical`, `draft: true`, tanpa `youtubeId`.
-- User meng-upload `final3.mp4` ke YouTube (bukan `share3.mp4`, karena kualitasnya lebih tinggi dan YouTube melakukan transcode ulang). Setelah itu user mengisi `youtubeId` dan mengubah `draft` menjadi `false`.
+- Cover `public/blog/hermes-agent.jpg` (1200x630) dibuat dari frame detik 21,6 di `final3.mp4` ("Hermes Agent"), dengan latar frame yang sama di-blur.
+- `draft: true`, tanpa `video`. User memposting video ke TikTok atau Instagram, lalu mengisi `video` dengan link-nya dan mengubah `draft` menjadi `false`.
 
 ## Dependency baru (`apps/jokoding.id`)
 
@@ -186,7 +189,8 @@ Fungsi murni yang dipakai bersama oleh prerender dan client:
 
 Unit test dengan vitest, mengikuti pola `src/order/buildOrderMessage.test.js`:
 
-- `src/blog/posts.test.js`: parse frontmatter, field wajib, aturan `youtubeId` hanya untuk non-draft, filter draft, urutan tanggal, `date` dan `orientation` tidak valid, nama file bukan slug valid, default `orientation` dan `cover`.
+- `src/blog/parsePosts.test.js`: parse frontmatter, field wajib, aturan `video` dan `cover` hanya untuk non-draft, link video tidak dikenal, filter draft, urutan tanggal, `date` tidak valid, nama file bukan slug valid.
+- `src/blog/parseVideoUrl.test.js`: link TikTok, variasi link Instagram, link tidak didukung (`vm.tiktok.com`, YouTube, profil Instagram).
 - `src/blog/seo.test.js`: isi meta tag, JSON-LD, escape `"`, `<`, dan `&` pada judul dan deskripsi.
 - `src/blog/sitemap.test.js`: daftar URL dan `lastmod`.
 
@@ -210,4 +214,5 @@ Cek manual di `vite preview`:
 - Tag, kategori, search, pagination, RSS, komentar.
 - CMS.
 - Hosting video sendiri.
+- YouTube (dihapus di revisi; bisa ditambah lagi lewat `parseVideoUrl`).
 - Halaman 404 kustom.

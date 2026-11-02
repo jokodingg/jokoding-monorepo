@@ -6,9 +6,8 @@ const post = (overrides = {}) => ({
   title: 'Hermes',
   description: 'Desc',
   date: '2026-11-02',
-  youtubeId: 'abc',
-  orientation: 'vertical',
-  cover: 'https://i.ytimg.com/vi/abc/hqdefault.jpg',
+  video: { platform: 'tiktok', id: '123', embedUrl: 'https://www.tiktok.com/player/v1/123' },
+  cover: '/blog/hermes-agent.jpg',
   draft: false,
   html: '<p>Isi</p>',
   ...overrides,
@@ -31,9 +30,9 @@ describe('postMeta', () => {
       '@type': 'VideoObject',
       name: 'Hermes',
       description: 'Desc',
-      thumbnailUrl: 'https://i.ytimg.com/vi/abc/hqdefault.jpg',
+      thumbnailUrl: 'https://jokoding.id/blog/hermes-agent.jpg',
       uploadDate: '2026-11-02',
-      embedUrl: 'https://www.youtube-nocookie.com/embed/abc',
+      embedUrl: 'https://www.tiktok.com/player/v1/123',
     });
   });
 
@@ -42,7 +41,7 @@ describe('postMeta', () => {
   });
 
   it('cover https dipakai apa adanya', () => {
-    expect(postMeta(post()).image).toBe('https://i.ytimg.com/vi/abc/hqdefault.jpg');
+    expect(postMeta(post({ cover: 'https://cdn.example.com/x.jpg' })).image).toBe('https://cdn.example.com/x.jpg');
   });
 
   it('cover null pakai og-image default', () => {
@@ -67,7 +66,7 @@ describe('renderHead', () => {
     expect(head).toContain('<title>Hermes | Blog Jokoding</title>');
     expect(head).toContain('<link rel="canonical" href="https://jokoding.id/blog/hermes-agent" />');
     expect(head).toContain('<meta property="og:type" content="article" />');
-    expect(head).toContain('<meta property="og:image" content="https://i.ytimg.com/vi/abc/hqdefault.jpg" />');
+    expect(head).toContain('<meta property="og:image" content="https://jokoding.id/blog/hermes-agent.jpg" />');
     expect(head).toContain('<meta name="twitter:card" content="summary_large_image" />');
     expect(head).toContain('<script type="application/ld+json">');
   });

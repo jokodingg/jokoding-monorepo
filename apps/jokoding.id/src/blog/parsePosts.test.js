@@ -8,7 +8,8 @@ const valid = (overrides = {}) => {
     title: '"Hermes"',
     description: '"Desc"',
     date: '2026-11-02',
-    youtubeId: '"abc"',
+    video: 'https://www.tiktok.com/@jokodingg/video/123',
+    cover: '/blog/x.jpg',
     ...overrides,
   };
   return Object.entries(fields)
@@ -21,7 +22,7 @@ const one = (lines, { name = 'x', includeDrafts = false, body } = {}) =>
 
 describe('parsePosts', () => {
   it('mengubah file markdown jadi post lengkap', () => {
-    const posts = one(valid({ orientation: 'vertical' }), { name: 'hermes-agent', body: '## Halo\n\nIsi' });
+    const posts = one(valid(), { name: 'hermes-agent', body: '## Halo\n\nIsi' });
 
     expect(posts).toEqual([
       {
@@ -29,9 +30,12 @@ describe('parsePosts', () => {
         title: 'Hermes',
         description: 'Desc',
         date: '2026-11-02',
-        youtubeId: 'abc',
-        orientation: 'vertical',
-        cover: 'https://i.ytimg.com/vi/abc/hqdefault.jpg',
+        video: {
+          platform: 'tiktok',
+          id: '123',
+          embedUrl: 'https://www.tiktok.com/player/v1/123',
+        },
+        cover: '/blog/x.jpg',
         draft: false,
         html: expect.stringContaining('<h2'),
       },
@@ -48,19 +52,9 @@ describe('parsePosts', () => {
     expect(post.date).toBe('2026-01-31');
   });
 
-  it('orientation default horizontal', () => {
-    const [post] = one(valid());
-    expect(post.orientation).toBe('horizontal');
-  });
-
-  it('cover dari frontmatter dipakai apa adanya', () => {
-    const [post] = one(valid({ cover: '/blog/x.jpg' }));
-    expect(post.cover).toBe('/blog/x.jpg');
-  });
-
-  it('draft tanpa youtubeId lolos, cover null', () => {
-    const [post] = one(valid({ youtubeId: undefined, draft: 'true' }), { includeDrafts: true });
-    expect(post).toMatchObject({ draft: true, youtubeId: null, cover: null });
+  it('draft tanpa video dan cover lolos', () => {
+    const [post] = one(valid({ video: undefined, cover: undefined, draft: 'true' }), { includeDrafts: true });
+    expect(post).toMatchObject({ draft: true, video: null, cover: null });
   });
 
   it('draft disembunyikan kalau includeDrafts false', () => {
@@ -83,18 +77,18 @@ describe('parsePosts', () => {
     expect(() => one(valid({ [field]: undefined }))).toThrow(`content/blog/x.md: "${field}" wajib diisi`);
   });
 
-  it('gagal kalau youtubeId kosong pada post non-draft', () => {
-    expect(() => one(valid({ youtubeId: undefined }))).toThrow('content/blog/x.md: "youtubeId" wajib diisi');
+  it.each(['video', 'cover'])('gagal kalau %s kosong pada post non-draft', (field) => {
+    expect(() => one(valid({ [field]: undefined }))).toThrow(`content/blog/x.md: "${field}" wajib diisi`);
+  });
+
+  it('gagal kalau link video tidak didukung, juga pada draft', () => {
+    expect(() => one(valid({ video: 'https://vm.tiktok.com/ZSabc/', draft: 'true' }), { includeDrafts: true })).toThrow(
+      'content/blog/x.md: "video" harus link TikTok (tiktok.com/@akun/video/...) atau Instagram (instagram.com/reel/...)',
+    );
   });
 
   it('gagal kalau date tidak valid', () => {
     expect(() => one(valid({ date: '"kemarin"' }))).toThrow('content/blog/x.md: "date" tidak valid');
-  });
-
-  it('gagal kalau orientation tidak dikenal', () => {
-    expect(() => one(valid({ orientation: 'square' }))).toThrow(
-      'content/blog/x.md: "orientation" harus vertical atau horizontal',
-    );
   });
 
   it('gagal kalau nama file bukan slug valid', () => {

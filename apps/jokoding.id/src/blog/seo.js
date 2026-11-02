@@ -51,14 +51,14 @@ export const postMeta = (post) => {
       image,
       author: ORGANIZATION,
       publisher: ORGANIZATION,
-      ...(post.youtubeId && {
+      ...(post.video && {
         video: {
           '@type': 'VideoObject',
           name: post.title,
           description: post.description,
           thumbnailUrl: image,
           uploadDate: post.date,
-          embedUrl: `https://www.youtube-nocookie.com/embed/${post.youtubeId}`,
+          embedUrl: post.video.embedUrl,
         },
       }),
     },

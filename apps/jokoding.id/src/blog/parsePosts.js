@@ -1,9 +1,9 @@
 import frontMatter from 'front-matter';
 import { marked } from 'marked';
+import { parseVideoUrl } from './parseVideoUrl';
 
 const SLUG_PATTERN = /^[a-z0-9-]+$/;
 const ISO_DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
-const ORIENTATIONS = ['vertical', 'horizontal'];
 
 // YAML mengubah `date: 2026-11-02` jadi objek Date; tanggal dalam tanda kutip tetap string.
 const normalizeDate = (value) => {
@@ -32,29 +32,25 @@ const parseOne = (path, raw) => {
   for (const field of ['title', 'description', 'date']) {
     if (isEmpty(meta[field])) fail(`"${field}" wajib diisi`);
   }
-  if (!draft && isEmpty(meta.youtubeId)) fail('"youtubeId" wajib diisi');
+  for (const field of ['video', 'cover']) {
+    if (!draft && isEmpty(meta[field])) fail(`"${field}" wajib diisi`);
+  }
 
   const date = normalizeDate(meta.date);
   if (!date) fail('"date" tidak valid');
 
-  const orientation = meta.orientation ?? 'horizontal';
-  if (!ORIENTATIONS.includes(orientation)) fail('"orientation" harus vertical atau horizontal');
-
-  const youtubeId = isEmpty(meta.youtubeId) ? null : String(meta.youtubeId);
-  const cover = !isEmpty(meta.cover)
-    ? String(meta.cover)
-    : youtubeId
-      ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`
-      : null;
+  const video = isEmpty(meta.video) ? null : parseVideoUrl(String(meta.video).trim());
+  if (!isEmpty(meta.video) && !video) {
+    fail('"video" harus link TikTok (tiktok.com/@akun/video/...) atau Instagram (instagram.com/reel/...)');
+  }
 
   return {
     slug,
     title: String(meta.title),
     description: String(meta.description),
     date,
-    youtubeId,
-    orientation,
-    cover,
+    video,
+    cover: isEmpty(meta.cover) ? null : String(meta.cover),
     draft,
     html: marked.parse(body),
   };
