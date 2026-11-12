@@ -9,7 +9,7 @@ import { injectPage } from './lib/injectPage.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 
-const { render, getPosts, blogIndexMeta, postMeta, renderHead, buildSitemap } = await import(
+const { render, getPosts, computerVisionMeta, CV_PATH, blogIndexMeta, postMeta, renderHead, buildSitemap } = await import(
   pathToFileURL(join(root, 'dist-server/entry-server.js')).href
 );
 
@@ -31,6 +31,7 @@ for (const post of posts) {
   }
 }
 
+await writePage(CV_PATH, computerVisionMeta());
 await writePage('/blog', blogIndexMeta());
 for (const post of posts) {
   await writePage(`/blog/${post.slug}`, postMeta(post));
