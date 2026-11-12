@@ -58,7 +58,7 @@ const Services = () => {
     { 
       icon: <Code className="w-8 h-8" />, 
       title: 'AI & Deep Learning', 
-      desc: 'Implementasi Computer Vision (CV), pembuatan chatbot (LLM), dan program prediksi dengan ML.' 
+      desc: 'Joki computer vision (deteksi objek YOLO, OpenCV, face recognition, klasifikasi citra CNN), chatbot LLM, dan prediksi dengan ML.' 
     },
     { 
       icon: <Server className="w-8 h-8" />, 

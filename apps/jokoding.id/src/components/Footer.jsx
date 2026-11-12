@@ -69,6 +69,7 @@ const Footer = () => {
               { label: 'Web Development', href: '/#services' },
               { label: 'IoT & Embedded', href: '/#services' },
               { label: 'AI & Machine Learning', href: '/#services' },
+              { label: 'Joki Computer Vision', href: '/computer-vision' },
               { label: 'Mobile Apps', href: '/#services' },
             ]} 
           />

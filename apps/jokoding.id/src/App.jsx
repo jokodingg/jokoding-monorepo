@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
+import ComputerVision from './pages/ComputerVision';
 import { OrderFormProvider } from './order/OrderFormProvider';
 import MetaPixelTracker from './lib/MetaPixelTracker';
 
@@ -27,6 +28,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/computer-vision" element={<ComputerVision />} />
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
