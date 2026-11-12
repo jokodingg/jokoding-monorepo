@@ -9,6 +9,10 @@ const FAQ = () => {
 
   const faqs = [
     {
+      question: 'Apakah Jokoding menerima joki computer vision?',
+      answer: 'Ya! Kami menerima joki computer vision untuk tugas kuliah, skripsi, maupun project bisnis: deteksi objek dengan YOLO, klasifikasi gambar (CNN), face recognition, OCR, segmentasi citra, dan image processing dengan OpenCV/Python. Termasuk training dataset, evaluasi model, dan deployment ke web, Android, atau Raspberry Pi.'
+    },
+    {
       question: 'Berapa lama waktu pengerjaan project?',
       answer: 'Waktu pengerjaan bervariasi tergantung kompleksitas. Landing page sederhana: 3-5 hari. Website company profile: 7-14 hari. Web application kompleks: 3-8 minggu. Kami akan memberikan timeline detail setelah diskusi kebutuhan.'
     },
