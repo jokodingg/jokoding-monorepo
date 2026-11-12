@@ -2,6 +2,7 @@ import React from 'react';
 import { Instagram, Linkedin, MessageCircle, Mail, MapPin, ArrowRight } from 'lucide-react';
 import { waLink, EMAIL, INSTAGRAM_URL } from '@jokoding/config';
 import { useOrderForm } from '../order/OrderFormProvider';
+import { LANDINGS } from '../landing/landings';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -65,13 +66,7 @@ const Footer = () => {
           {/* COL 2-4: Links */}
           <FooterLinks 
             title="Layanan" 
-            items={[
-              { label: 'Web Development', href: '/#services' },
-              { label: 'IoT & Embedded', href: '/#services' },
-              { label: 'AI & Machine Learning', href: '/#services' },
-              { label: 'Joki Computer Vision', href: '/computer-vision' },
-              { label: 'Mobile Apps', href: '/#services' },
-            ]} 
+            items={LANDINGS.map((l) => ({ label: l.navLabel, href: l.path }))} 
           />
 
           <FooterLinks 

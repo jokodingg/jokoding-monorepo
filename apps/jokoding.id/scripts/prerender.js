@@ -9,7 +9,7 @@ import { injectPage } from './lib/injectPage.js';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 
-const { render, getPosts, computerVisionMeta, CV_PATH, blogIndexMeta, postMeta, renderHead, buildSitemap } = await import(
+const { render, getPosts, LANDINGS, landingMeta, blogIndexMeta, postMeta, renderHead, buildSitemap } = await import(
   pathToFileURL(join(root, 'dist-server/entry-server.js')).href
 );
 
@@ -31,12 +31,14 @@ for (const post of posts) {
   }
 }
 
-await writePage(CV_PATH, computerVisionMeta());
+for (const landing of LANDINGS) {
+  await writePage(landing.path, landingMeta(landing));
+}
 await writePage('/blog', blogIndexMeta());
 for (const post of posts) {
   await writePage(`/blog/${post.slug}`, postMeta(post));
 }
 
 const today = new Date().toISOString().slice(0, 10);
-await writeFile(join(dist, 'sitemap.xml'), buildSitemap(posts, today));
+await writeFile(join(dist, 'sitemap.xml'), buildSitemap(posts, today, LANDINGS.map((l) => l.path)));
 console.log('prerender: dist/sitemap.xml');
