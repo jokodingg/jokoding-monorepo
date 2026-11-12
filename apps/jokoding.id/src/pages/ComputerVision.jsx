@@ -3,6 +3,37 @@ import { ChevronDown } from 'lucide-react';
 import { useOrderForm } from '../order/OrderFormProvider';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
 import { CV_FAQS, CV_TITLE } from '../landing/computerVision';
+import tomatoProject from '../assets/portfolio/project1.webp';
+
+// Ilustrasi deteksi objek: kotak + label confidence ala YOLO.
+const DetectionIllustration = () => (
+  <svg viewBox="0 0 480 360" role="img" aria-label="Ilustrasi deteksi objek computer vision dengan bounding box YOLO" className="h-auto w-full rounded-2xl shadow-xl">
+    <rect width="480" height="360" fill="#1f2937" />
+    <rect y="250" width="480" height="110" fill="#374151" />
+    <circle cx="400" cy="70" r="28" fill="#fbbf24" opacity="0.8" />
+    <g fill="#9ca3af">
+      <rect x="40" y="200" width="150" height="55" rx="14" />
+      <circle cx="75" cy="258" r="16" fill="#111827" /><circle cx="155" cy="258" r="16" fill="#111827" />
+      <rect x="65" y="178" width="90" height="30" rx="8" />
+    </g>
+    <g fill="#d1d5db">
+      <circle cx="290" cy="140" r="18" />
+      <rect x="274" y="160" width="32" height="70" rx="10" />
+      <rect x="276" y="228" width="12" height="40" rx="5" /><rect x="292" y="228" width="12" height="40" rx="5" />
+    </g>
+    <g fill="#ef4444"><circle cx="390" cy="240" r="22" /><circle cx="425" cy="250" r="18" /></g>
+    <g fill="none" strokeWidth="3">
+      <rect x="30" y="165" width="172" height="112" stroke="#10b981" />
+      <rect x="262" y="114" width="56" height="160" stroke="#f59e0b" />
+      <rect x="362" y="212" width="90" height="62" stroke="#3b82f6" />
+    </g>
+    <g fontFamily="Poppins, sans-serif" fontSize="13" fontWeight="600" fill="#fff">
+      <rect x="30" y="143" width="88" height="22" fill="#10b981" /><text x="37" y="159">mobil 0.94</text>
+      <rect x="262" y="92" width="96" height="22" fill="#f59e0b" /><text x="269" y="108">orang 0.91</text>
+      <rect x="362" y="190" width="90" height="22" fill="#3b82f6" /><text x="369" y="206">tomat 0.88</text>
+    </g>
+  </svg>
+);
 
 const SERVICES = [
   { title: 'Deteksi Objek (YOLO)', desc: 'Training YOLOv5/v8/v11 dengan dataset custom, real-time dari kamera atau video.' },
@@ -30,6 +61,7 @@ const ComputerVision = () => {
   return (
     <main className="min-h-screen bg-[#f7f7f2] pt-32 pb-24">
       <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
         <header className="max-w-3xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-600">Layanan AI</p>
           <h1 className="text-4xl font-bold text-gray-900 md:text-5xl">Joki Computer Vision</h1>
@@ -45,6 +77,8 @@ const ComputerVision = () => {
             Konsultasi Gratis
           </button>
         </header>
+        <DetectionIllustration />
+        </div>
 
         <section className="mt-20">
           <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">Layanan Computer Vision</h2>
@@ -77,9 +111,19 @@ const ComputerVision = () => {
                 <span key={t} className="rounded-full border border-gray-200 bg-white px-4 py-2 text-gray-700">{t}</span>
               ))}
             </div>
-            <p className="mt-6 text-gray-600">
-              Contoh project: klasifikasi kematangan tomat berdasarkan warna dengan Python dan OpenCV.
-            </p>
+            <figure className="mt-8">
+              <img
+                src={tomatoProject}
+                alt="Contoh project joki computer vision: klasifikasi kematangan tomat dengan Python dan OpenCV"
+                width="960"
+                height="540"
+                loading="lazy"
+                className="h-auto w-full rounded-2xl border border-gray-200 shadow-md"
+              />
+              <figcaption className="mt-3 text-sm text-gray-600">
+                Contoh project: klasifikasi kematangan tomat berdasarkan warna (ROI + color mask) dengan Python dan OpenCV.
+              </figcaption>
+            </figure>
           </div>
         </section>
 
