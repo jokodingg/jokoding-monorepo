@@ -6,7 +6,7 @@ import App from './App'
 
 export { getPosts } from './blog/posts'
 export { blogIndexMeta, postMeta, renderHead } from './blog/seo'
-export { computerVisionMeta, CV_PATH } from './landing/computerVision'
+export { LANDINGS, landingMeta } from './landing/landings'
 export { buildSitemap } from './blog/sitemap'
 
 export const render = (url) =>

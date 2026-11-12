@@ -11,6 +11,7 @@ describe('buildSitemap', () => {
         { slug: 'lama', date: '2026-10-01' },
       ],
       '2026-11-05',
+      ['/computer-vision'],
     );
 
     expect(xml).toMatch(/^<\?xml version="1.0" encoding="UTF-8"\?>/);

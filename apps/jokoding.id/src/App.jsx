@@ -8,7 +8,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import BlogIndex from './pages/BlogIndex';
 import BlogPost from './pages/BlogPost';
-import ComputerVision from './pages/ComputerVision';
+import ServiceLanding from './pages/ServiceLanding';
+import { LANDINGS } from './landing/landings';
 import { OrderFormProvider } from './order/OrderFormProvider';
 import MetaPixelTracker from './lib/MetaPixelTracker';
 
@@ -28,7 +29,9 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/computer-vision" element={<ComputerVision />} />
+        {LANDINGS.map((l) => (
+          <Route key={l.path} path={l.path} element={<ServiceLanding landing={l} />} />
+        ))}
         <Route path="/blog" element={<BlogIndex />} />
         <Route path="/blog/:slug" element={<BlogPost />} />
       </Routes>
