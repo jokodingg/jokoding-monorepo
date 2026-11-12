@@ -51,6 +51,16 @@ const STEPS = [
   'Serah terima source code, laporan hasil, dan sesi penjelasan.',
 ];
 
+// Portfolio computer vision: tambah project baru cukup dengan menambah item di array ini.
+const PORTFOLIO = [
+  {
+    image: tomatoProject,
+    title: 'Tomato Ripeness Classifier',
+    desc: 'Klasifikasi kematangan tomat berdasarkan warna (ROI + color mask).',
+    tech: ['Python', 'OpenCV', 'Matplotlib'],
+  },
+];
+
 const TECH = ['Python', 'OpenCV', 'YOLO (Ultralytics)', 'TensorFlow / Keras', 'PyTorch', 'Roboflow', 'Streamlit / Flask', 'Raspberry Pi'];
 
 const ComputerVision = () => {
@@ -111,19 +121,33 @@ const ComputerVision = () => {
                 <span key={t} className="rounded-full border border-gray-200 bg-white px-4 py-2 text-gray-700">{t}</span>
               ))}
             </div>
-            <figure className="mt-8">
-              <img
-                src={tomatoProject}
-                alt="Contoh project joki computer vision: klasifikasi kematangan tomat dengan Python dan OpenCV"
-                width="960"
-                height="540"
-                loading="lazy"
-                className="h-auto w-full rounded-2xl border border-gray-200 shadow-md"
-              />
-              <figcaption className="mt-3 text-sm text-gray-600">
-                Contoh project: klasifikasi kematangan tomat berdasarkan warna (ROI + color mask) dengan Python dan OpenCV.
-              </figcaption>
-            </figure>
+          </div>
+        </section>
+
+        <section className="mt-20">
+          <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">Portfolio</h2>
+          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {PORTFOLIO.map((p) => (
+              <article key={p.title} className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
+                <img
+                  src={p.image}
+                  alt={`Portfolio joki computer vision: ${p.title}`}
+                  width="960"
+                  height="540"
+                  loading="lazy"
+                  className="aspect-video h-auto w-full object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="text-lg font-semibold text-gray-900">{p.title}</h3>
+                  <p className="mt-2 text-gray-600">{p.desc}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {p.tech.map((t) => (
+                      <span key={t} className="rounded-full bg-emerald-50 px-3 py-1 text-xs font-medium text-emerald-700">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 
