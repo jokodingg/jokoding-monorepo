@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { useOrderForm } from '../order/OrderFormProvider';
 import { useDocumentTitle } from '../lib/useDocumentTitle';
-import { DEFAULT_STEPS } from '../landing/landings';
+import { Link } from 'react-router-dom';
+import { DEFAULT_STEPS, LANDINGS } from '../landing/landings';
 import { DetectionIllustration } from '../landing/DetectionIllustration';
 
 // Panel samping hero: ilustrasi khusus, foto portfolio pertama, atau daftar teknologi.
@@ -133,6 +134,17 @@ const ServiceLanding = ({ landing }) => {
                 </button>
                 <p className={`px-5 pb-5 text-gray-600 ${openIndex === i ? '' : 'hidden'}`}>{faq.a}</p>
               </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-20">
+          <h2 className="text-2xl font-bold text-gray-900 md:text-3xl">Layanan Lainnya</h2>
+          <div className="mt-6 flex flex-wrap gap-3">
+            {LANDINGS.filter((l) => l.path !== landing.path).map((l) => (
+              <Link key={l.path} to={l.path} className="rounded-full border border-gray-200 bg-white px-4 py-2 text-gray-700 transition hover:border-emerald-500 hover:text-emerald-700">
+                {l.navLabel}
+              </Link>
             ))}
           </div>
         </section>
