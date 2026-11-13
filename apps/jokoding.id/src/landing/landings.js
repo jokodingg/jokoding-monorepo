@@ -438,7 +438,13 @@ export const landingMeta = (l) => {
           description: l.description,
           url: canonical,
           areaServed: { '@type': 'Country', name: 'Indonesia' },
-          provider: { '@type': 'LocalBusiness', name: 'Jokoding', url: SITE_URL },
+          provider: {
+            '@type': 'LocalBusiness',
+            name: 'Jokoding',
+            url: SITE_URL,
+            telephone: '+62881080715967',
+            address: { '@type': 'PostalAddress', addressLocality: 'Semarang', addressRegion: 'Jawa Tengah', addressCountry: 'ID' },
+          },
         },
         {
           '@type': 'FAQPage',
