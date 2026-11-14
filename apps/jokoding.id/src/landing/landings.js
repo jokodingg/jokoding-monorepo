@@ -81,7 +81,7 @@ export const LANDINGS = [
     eyebrow: 'Web Development',
     h1: 'Joki Website & Jasa Pembuatan Website',
     title: 'Joki Website & Jasa Pembuatan Website Semarang | Jokoding',
-    description: 'Joki website dan jasa pembuatan web: company profile, toko online, sistem informasi, dan web skripsi dengan Laravel, React, atau PHP. Konsultasi gratis.',
+    description: 'Joki website dan jasa website development Semarang: company profile, toko online, sistem informasi, dan web skripsi dengan Laravel, React, atau PHP. Konsultasi gratis.',
     intro: 'Butuh website untuk usaha, tugas kuliah, atau skripsi? Jokoding membuat website cepat, responsif, dan siap online, dari landing page sampai sistem informasi lengkap.',
     services: [
       { title: 'Company Profile & Landing Page', desc: 'Website profesional, cepat, dan SEO-friendly untuk usaha dan UMKM.' },
