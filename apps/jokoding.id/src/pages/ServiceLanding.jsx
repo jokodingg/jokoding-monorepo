@@ -47,6 +47,7 @@ const ServiceLanding = ({ landing }) => {
             <p className="mb-3 text-sm font-semibold uppercase tracking-wide text-emerald-600">{landing.eyebrow}</p>
             <h1 className="text-4xl font-bold text-gray-900 md:text-5xl">{landing.h1}</h1>
             <p className="mt-5 text-lg leading-relaxed text-gray-600">{landing.intro}</p>
+            <p className="mt-3 text-sm text-gray-500">Berbasis di Semarang, melayani online ke seluruh Indonesia.</p>
             <button
               onClick={open}
               className="mt-8 inline-flex cursor-pointer items-center gap-2 rounded-xl bg-emerald-600 px-6 py-3 font-semibold text-white shadow-lg shadow-emerald-600/30 transition hover:bg-emerald-700"
